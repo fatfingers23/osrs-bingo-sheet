@@ -1,7 +1,8 @@
 [
   {
     "tileName": "3x GEM set from toa",
-    "description": "3 x gem set from TOA (all 3 gems required)"
+    "description": "3 x gem set from TOA (all 3 gems required)",
+    "picName": 1
   },
   {
     "tileName": "Barrows set",

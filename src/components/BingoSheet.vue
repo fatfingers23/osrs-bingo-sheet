@@ -1,33 +1,55 @@
 <script setup lang="ts">
-import { reactive } from 'vue'
+import { reactive, computed } from 'vue'
 import bingoSheet from '../bingoSheet.json'
 
 interface LooseObject {
   [key: string]: any
 }
 
+//HACK God im so lazy. The pics are off by 1 cause i didnt want to write a script to deal with it
+let picIndex = 1;
+bingoSheet.forEach(x => {
+  x.picName = picIndex;
+  picIndex++;
+})
 
 const state = reactive({
   modal: false,
   tile: {
     tileName: "",
-    description: ""
-  }
+    description: "",
+    picName:""
+  },
+  search: ''
 });
 
 function openModal(item: LooseObject):void{
   state.modal = true;
   state.tile.tileName = item.tileName;
   state.tile.description = item.description;
+  state.tile.picName = item.picName
 }
 
 function closeModal():void{
   state.modal = false;
   state.tile = {
     tileName: "",
-    description: ""
+    description: "",
+    picName:""
   };
 }
+
+const filterList = computed(() => {
+  if(state.search === ''){
+    console.log("test")
+
+    return bingoSheet
+  }else{
+    console.log("test")
+    return bingoSheet.filter(tile => tile.tileName.includes(state.search))
+  }
+})
+
 
 </script>
 
@@ -40,15 +62,18 @@ function closeModal():void{
     <li>Can be dupe gwd items including nex to cover both tiles</li>
     <li>When posting the screenshots can you please for sets post say 1/4 or 1/6 for metal boots so its easier for us to track. Example on dragon set you get the med helm put 'dragon set 1/4'
     </li>
-
   </ul>
+  <input type="text" placeholder="Search..." v-model="state.search"/>
+  <button v-on:click="state.search = ''" >Clear</button>
   <div class="bingo-board">
-    <div v-for="(item, index) in bingoSheet" :key="index">
+    <div v-for="(item, index) in filterList" :key="index">
     <div class="bingo-tile" v-on:click="openModal(item)" >
       <!--This code sucks i know but yolo? -->
-      <img v-if="index === 0" :src="`./tiles/${index + 1}.png`">
-      <img v-else-if="index === 71" :src="`./tiles/${index - 1}.png`">
-      <img v-else :src="`./tiles/${index + 1}.png`">
+      <img :src="`./tiles/${item.picName}.png`">
+
+      <!--      <img v-if="index === 0" :src="`./tiles/${index + 1}.png`">-->
+<!--      <img v-else-if="index === 71" :src="`./tiles/${index - 1}.png`">-->
+<!--      <img v-else :src="`./tiles/${index + 1}.png`">-->
     </div>
     </div>
 
