@@ -10,6 +10,11 @@ const router = createRouter({
       component: BingoSheet
     },
     {
+      path: '/:teamName',
+      name: 'team',
+      component: BingoSheet
+    },
+    {
       path: '/about',
       name: 'about',
       // route level code-splitting

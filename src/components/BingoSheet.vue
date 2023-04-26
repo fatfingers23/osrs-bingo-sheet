@@ -1,14 +1,19 @@
 <script setup lang="ts">
 import {reactive, computed} from 'vue'
 import bingoSheet from '../bingoSheet.json'
-
+// eslint-disable-next-line no-undef
+// import Papa from 'papaparse'
+// import { useRoute } from 'vue-router'
 interface LooseObject {
   [key: string]: any
 }
 
+const reactiveBingo = reactive(bingoSheet);
+
+
 //HACK God im so lazy. The pics are off by 1 cause i didnt want to write a script to deal with it
 let picIndex = 1;
-bingoSheet.forEach(x => {
+reactiveBingo.forEach(x => {
   x.picName = picIndex;
   picIndex++;
 })
@@ -48,11 +53,32 @@ function closeModal(): void {
 
 const filterList = computed(() => {
   if (state.search === '') {
-    return bingoSheet
+    return reactiveBingo
   } else {
-    return bingoSheet.filter(tile => tile.tileName.toLowerCase().includes(state.search.toLowerCase()))
+    return reactiveBingo.filter(tile => tile.tileName.toLowerCase().includes(state.search.toLowerCase()))
   }
 })
+
+// const route = useRoute()
+// const teamName = route.params.teamName;
+//
+//
+// if(teamName){
+//   fetch("")
+//       .then(x => x.text().then(
+//           gsheet => {
+//             const parsedSheet = Papa.parse(gsheet, {header:true});
+//             parsedSheet.data.forEach(row => {
+//               const drop = row['Drops'];
+//               let tile = reactiveBingo.find(x => x.tileName.toLowerCase() === drop.toLowerCase())
+//               if(tile){
+//
+//                 tile.complete = row[teamName] == 1;
+//               }
+//             })
+//           }
+//       ))
+// }
 
 
 </script>
@@ -61,6 +87,7 @@ const filterList = computed(() => {
   <h1>Mega Millions March 2023 Bingo</h1>
   <sub> This may be the ugliest quickest site i ever made so plz 4give
   </sub>
+<!--  <h2>Team: {{teamName}}</h2>-->
   <h3>Extra Info</h3>
   <ul style="list-style: none">
     <li>Can be dupe gwd items including nex to cover both tiles</li>
@@ -74,13 +101,14 @@ const filterList = computed(() => {
   </div>
   <div class="bingo-board">
     <div v-for="(item, index) in filterList" :key="index">
-      <div class="bingo-tile" v-on:click="openModal(item)">
-        <!--This code sucks i know but yolo? -->
-        <img :src="`./tiles/${item.picName}.png`">
+      <div v-if="item.complete" class="bingo-tile done">
+<!--        <img :src="`./tiles/${item.picName}.png`">-->
 
-        <!--      <img v-if="index === 0" :src="`./tiles/${index + 1}.png`">-->
-        <!--      <img v-else-if="index === 71" :src="`./tiles/${index - 1}.png`">-->
-        <!--      <img v-else :src="`./tiles/${index + 1}.png`">-->
+        <div class="tile-text">{{item.tileName}}</div>
+      </div>
+
+      <div v-else class="bingo-tile" v-on:click="openModal(item)">
+        <img :src="`./tiles/${item.picName}.png`">
       </div>
     </div>
 
@@ -136,5 +164,15 @@ const filterList = computed(() => {
   color: black;
   text-decoration: none;
   cursor: pointer;
+}
+
+.done {
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L0 100 ' stroke='black' stroke-width='1'/><path d='M0 0 L100 100 ' stroke='black' stroke-width='1'/></svg>");
+  background-repeat:no-repeat;
+  background-position:center center;
+  background-size: 100% 100%, auto;
+  z-index: 1000000;
+  color: red;
+
 }
 </style>
