@@ -84,17 +84,29 @@ const filterList = computed(() => {
 </script>
 
 <template>
-  <h1>Mega Millions March 2023 Bingo</h1>
-  <sub> This may be the ugliest quickest site i ever made so plz 4give
-  </sub>
+
+  <h1>April showers, bring flash bingos </h1>
+
 <!--  <h2>Team: {{teamName}}</h2>-->
   <h3>Extra Info</h3>
-  <ul style="list-style: none">
-    <li>Can be dupe gwd items including nex to cover both tiles</li>
-    <li>When posting the screenshots can you please for sets post say 1/4 or 1/6 for metal boots so its easier for us to
-      track. Example on dragon set you get the med helm put 'dragon set 1/4'
-    </li>
-  </ul>
+  <p>
+      1m entry for your first raffle ticket.
+      +1 ticket for every bingo tile you earn, 16 tiles total to gain!
+
+      Three raffle prizes provided by the clan. However, more entries = more prizes! (Each member limited to one prize)
+      PRIZES:
+      1. Armadyl Godsword
+      2. Elder Maul
+      3. Dragonfire Ward
+
+      This is a SOLO event.
+      Bingo sheet will be released an hour before event.
+      Keyword will be posted at the start of the event.
+      Screenshots of items need to be posted in #botw-drops with the keyword visible.
+      Strongly encourage using WOM to display keyword when screenshotting drops. Feel free to contact me or other mods with any questions you may have.
+      I will do a live wheel spin in one of the voice chat channels to determine raffle winners for prizes.
+      I will do a live wheel spin in one of the voice chat channels to determine raffle winners for prizes.
+  </p>
   <div style="padding-bottom: 10px">
     <input type="text" placeholder="Search..." v-model="state.search"/>
     <button v-on:click="state.search = ''">Clear</button>

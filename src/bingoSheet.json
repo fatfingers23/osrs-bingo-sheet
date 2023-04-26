@@ -1,292 +1,68 @@
 [
   {
-    "tileName": "3x GEM set from toa",
-    "description": "3 x gem set from TOA (all 3 gems required)",
+    "tileName": "Metal Boots",
+    "description": "Any Metal Boots: Any 1 of the metal boots (just one)",
     "picName": 1,
     "complete": false
   },
   {
-    "tileName": "Barrows set",
-    "description": "Barrows Brothers set (full set from ONE brother). barrows brothers cannot be mixed and matched needs to be 1 full outfit of one brother"
+    "tileName": "KQ unique",
+    "description": "KQ Unique: Any KQ unique (Includes head)"
   },
   {
-    "tileName": "Zalcano shard",
-    "description": "Zalcano shard"
+    "tileName": "GWD unique",
+    "description": "GWD Unique: Any GWD unique"
   },
   {
-    "tileName": "Visage (draconic, skeletal or wyvern)",
-    "description": "Visage drop (one of, draconic, skeletal or wyvern shield)"
+    "tileName": "Zulrah unique",
+    "description": "Any Zulrah Unique"
   },
   {
-    "tileName": "Crystal grail",
-    "description": "Crystal grail"
+    "tileName": "Elder robe piece",
+    "description": "Any Elder Chaos Robe: Just 1 piece"
   },
   {
-    "tileName": "Skull sceptre",
-    "description": "Skull sceptre (all pieces)"
+    "tileName": "Beginner shoes",
+    "description": "Beginner Clue Scroll Boots:  Any 1 footwear from beginner clue scroll"
   },
   {
-    "tileName": "Nex unique",
-    "description": "Any NEX unique. Can be dupe gwd items including nex to cover both tiles"
+    "tileName": "Medium boots",
+    "description": "Any Medium Clue Footwear: Just 1"
   },
   {
-    "tileName": "Any bossing pet",
-    "description": ""
+    "tileName": "Revs unique",
+    "description": "Any Rev unique: 1"
   },
   {
-    "tileName": "giant hill club",
-    "description": ""
+    "tileName": "Any pet",
+    "description": "Any Pet: excluding chompy pet"
   },
   {
-    "tileName": "5 venator shards",
-    "description": "5 venator shards"
+    "tileName": "Tzhaar unique",
+    "description": "Any tzhaar unique drop: just 1"
   },
   {
-    "tileName": "Mole claw from Molanisk",
-    "description": "Mole claw from Molanisk"
+    "tileName": "Demonic unique",
+    "description": "Demonic Gorilla Unique: just 1"
   },
   {
-    "tileName": "50m TOTAL XP across the team",
-    "description": "50m TOTAL XP across the team (auto tracked by WOM)"
+    "tileName": "Elite unique",
+    "description": "Any Elite clue unique: no shared rewards count"
   },
   {
-    "tileName": "Nightmare - any orb or inquisitor",
-    "description": "Nightmare - any orb or inquisitor. nightmare staff counts as nightmare unique too\n"
+    "tileName": "Barrows unique",
+    "description": "Any Barrows unique: excluding bolt racks"
   },
   {
-    "tileName": "3 unsireds",
-    "description": "3 unsireds across the team"
+    "tileName": "Dks Unquie",
+    "description": "DKS unique: Any DKS unique (rings, dragon axe, seercrull, mud battlestaff)"
   },
   {
-    "tileName": "any piece of evil chicken outfit",
-    "description": "Any piece of the evil chicken outfit"
+    "tileName": "Gauntlet unique",
+    "description": "Any Gauntlet Unique:"
   },
   {
-    "tileName": "any raids armour set (ancestral, masori or justi)",
-    "description": "Any raids armour set (ancestral, masori or justi)"
-  },
-  {
-    "tileName": "orange and blue egg sac from grubby chest",
-    "description": "Orange and blue egg sac from grubby chest (need both). the egg sacs from grubby keys im not 100% sure if you can get duplicates so its best to send somebody who hasn't had either in the log to be sure (if you know on the duplicate situation let me know)"
-  },
-  {
-    "tileName": "blood shard",
-    "description": "Blood shard (from killing or thieving)"
-  },
-  {
-    "tileName": "smoke battlestaff from thermo",
-    "description": "Smoke battlestaff from thermo"
-  },
-  {
-    "tileName": "Zulrah set, onyx, serp, fang and tanzanite",
-    "description": "Zulrah set, onyx, serp, fang and tanzanite"
-  },
-  {
-    "tileName": "dragon harpoon",
-    "description": "Dragon harpoon"
-  },
-  {
-    "tileName": "5 crystal armour seeds",
-    "description": "5 crystal armour seeds from gauntlet"
-  },
-  {
-    "tileName": "elite clue unique",
-    "description": "Elite clue unique"
-  },
-  {
-    "tileName": "Voidwaker from scratch",
-    "description": "Voidwaker from scratch blade, hilt, gem (doesn't need to be created)"
-  },
-  {
-    "tileName": "mystic light set (hat, robe top and bottom, gloves and boots)",
-    "description": "Mystic LIGHT set (hat, robe top and bottom, gloves and boots)"
-  },
-  {
-    "tileName": "both tome of fire and water",
-    "description": "Both tome of fire and water"
-  },
-  {
-    "tileName": "boss jar drop",
-    "description": "Boss jar drop"
-  },
-  {
-    "tileName": "brine sabre",
-    "description": "Brine sabre"
-  },
-  {
-    "tileName": "metal dragon unique (dragon limbs, dragon metal lump, dragon metal slice)",
-    "description": "Metal dragon unique (dragon limbs, dragon metal lump or dragon metal slice)"
-  },
-  {
-    "tileName": "ring of endurance",
-    "description": "Ring of endurance"
-  },
-  {
-    "tileName": "enhanced crystal teleport seed",
-    "description": "Enhanced crystal teleport seed"
-  },
-  {
-    "tileName": "metal boots set (bronze, Iron,  Steel, Black, Mithril ,Adamant, Rune , Dragon)",
-    "description": "Metal boots set (bronze, Iron,  Steel, Black, Mithril ,Adamant, Rune , Dragon)"
-  },
-  {
-    "tileName": "abyssal lantern from gotr",
-    "description": "Abyssal lantern from GOTR"
-  },
-  {
-    "tileName": "black mask",
-    "description": "Black mask"
-  },
-  {
-    "tileName": "full god book (from clues)",
-    "description": "1 full god book (from clues, just all 4 pages)"
-  },
-  {
-    "tileName": "3 wilderness rings (treasonous, tyrannical, ring of the gods)",
-    "description": "All 3 wilderness rings (treasonous, tyrannical, ring of the gods)"
-  },
-  {
-    "tileName": "3 raids uniques (any raids)",
-    "description": "3 raid Purple chests (any raids)"
-  },
-  {
-    "tileName": "dragon set from scratch",
-    "description": "Dragon set from scratch (Dragon med, Dragon Chainbody, Dragon legs/skirt, Dragon boots)"
-  },
-  {
-    "tileName": "elder chaos robe set",
-    "description": "Elder chaos robe set"
-  },
-  {
-    "tileName": "broken pickaxe from volcanic mine",
-    "description": "Broken pickaxe from volcanic mine"
-  },
-  {
-    "tileName": "dragon'hai piece",
-    "description": "Any dragon'hai piece"
-  },
-  {
-    "tileName": "5 GWD uniques",
-    "description": "5 GWD uniques (nex included). Can be dupe gwd items including nex to cover both tiles"
-  },
-  {
-    "tileName": "fire cape in dhide and rcb/blowpipe",
-    "description": "Fire cape in dhide and rcb (no additional weapons in inventory). A screenshot would be required from inside with inv/gear set up with time showing for evidence that you aren't just hopping out changing gear and grabbing a tbow  but will be pretty evident by time the cape takes too these three items must be on during your jad run, any empty slot can have any item, no extra items in your inventory"
-  },
-  {
-    "tileName": "any godsword from scratch",
-    "description": "any godsword from scratch (1,2,3 shards and any hilt)"
-  },
-  {
-    "tileName": "gnomechild clue puzzlebox",
-    "description": "Gnomechild clue puzzlebox"
-  },
-  {
-    "tileName": "gout tuber",
-    "description": "Gout tuber"
-  },
-  {
-    "tileName": "full brimestone ring",
-    "description": "Full brimestone ring from hydra"
-  },
-  {
-    "tileName": "obsidian set (helm, top, bottoms)",
-    "description": "obsidian set (helm, top, bottoms)"
-  },
-  {
-    "tileName": "basilisk jaw",
-    "description": "Basilisk jaw"
-  },
-  {
-    "tileName": "fedora",
-    "description": "Fedora"
-  },
-  {
-    "tileName": "any revs unique not from boss",
-    "description": "Any revs unique (not just from killing the boss)"
-  },
-  {
-    "tileName": "4 zenyte shards",
-    "description": "4 Zenyte shards"
-  },
-  {
-    "tileName": "golden tench",
-    "description": "Golden tench"
-  },
-  {
-    "tileName": "amulet of eternal glory",
-    "description": "Amulet of eternal glory"
-  },
-  {
-    "tileName": "broken dragon hasta",
-    "description": "Broken dragon hasta"
-  },
-  {
-    "tileName": "full granite set (helm, body, legs, gloves, boots, shield and ring),",
-    "description": "Full granite set (helm, body, legs, gloves, boots, shield and ring)"
-  },
-  {
-    "tileName": "dragon pickaxe drop",
-    "description": "Dragon pickaxe drop"
-  },
-  {
-    "tileName": "any slayer superior item",
-    "description": "Any slayer superior item"
-  },
-  {
-    "tileName": "any big fish",
-    "description": "Any big fish.b ig harpoon fish from temp counts"
-  },
-  {
-    "tileName": "3 champion scrolls (3 different)",
-    "description": "3 champion scrolls (3 different, not just 3 goblin scrolls)"
-  },
-  {
-    "tileName": "5 strange old lockpicks",
-    "description": "5 strange old lockpicks"
-  },
-  {
-    "tileName": "cerb crystal set  (prims, peg, eternal and crystal)",
-    "description": "Cerb crystal set  (prims, peg, eternal and crystal)"
-  },
-  {
-    "tileName": "kraken tentacle/trident set",
-    "description": "Kraken tentacle/trident set"
-  },
-  {
-    "tileName": "skilling pet",
-    "description": "Skilling pet (Wintertodt/Tempoross included but no chompy bird). Guardian of the rift pet counts as a skilling pet too"
-  },
-  {
-    "tileName": "odium and malediction ward from scratch",
-    "description": "Both Odium and malediction wards from scratch"
-  },
-  {
-    "tileName": "Master clue unique",
-    "description": "Master clue unique"
-  },
-  {
-    "tileName": "bottomless compost bucket",
-    "description": "Bottomless compost bucket"
-  },
-  {
-    "tileName": "claw or jar from skotizo",
-    "description": "Dark Claw or jar from skotizo"
-  },
-  {
-    "tileName": "gnome scarf",
-    "description": "Gnome scarf"
-  },
-  {
-    "tileName": "beginner clue feet set (mole, frog, bear and demon)",
-    "description": "Beginner clue feet set (mole, frog, bear and demon)"
-  },
-  {
-    "tileName": "black tourmaline core",
-    "description": "Black tourmaline core"
-  },
-  {
-    "tileName": "stale baguette",
-    "description": "Stale baguette"
+    "tileName": "Bone",
+    "description": "Long Bone or Curved Bone:"
   }
 ]
