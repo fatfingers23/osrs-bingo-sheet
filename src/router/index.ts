@@ -10,10 +10,9 @@ const router = createRouter({
       component: BingoSheet
     },
     {
-      path: '/:id',
-      name: 'more-info',
-      component: BingoSheet,
-      props: true
+      path: '/:passcode',
+      name: 'team',
+      component: BingoSheet
     },
     {
       path: '/about',
