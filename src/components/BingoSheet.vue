@@ -71,17 +71,13 @@ const getCheckedTiles = (teamName: string) => {
       .then(x => x.text().then(
           gsheet => {
             const parsedSheet = Papa.parse(gsheet, {header: true});
-            console.log(parsedSheet)
+
             parsedSheet.data.forEach((row, index) => {
-              const teamCell = row[teamName];
-              console.log(teamCell)
-
+              const gSheetRow = row as LooseObject;
+              const teamCell = gSheetRow[teamName];
               if (reactiveBingo[index]) {
-                console.log(teamCell == 1, reactiveBingo[index])
-
                 reactiveBingo[index].complete = teamCell == 1;
               }
-
 
             })
           }
@@ -94,10 +90,12 @@ if (passcode) {
   fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vQ_zvnun0JORe_gdLWtYO_St124tlanqltTxxpay2UKcl-fP-nx3tZmdfpNltHgYj0Y8C4U80dmIwdR/pub?gid=32278501&single=true&output=csv")
       .then(x => x.text().then(
           gsheet => {
-            const parsedSheet = Papa.parse(gsheet, {header: true});
-            console.log(parsedSheet.data)
-            const teamName = parsedSheet.data.find(x => x['Passcode'] === passcode);
+            const parsedSheet = Papa.parse(gsheet, {header: true}) as LooseObject;
+            const teamName = parsedSheet.data.find((x: {
+              [x: string]: string | string[];
+            }) => x['Passcode'] === passcode);
             if (teamName) {
+
               state.teamName = teamName.Team
               getCheckedTiles(teamName.Team);
             }
@@ -249,8 +247,7 @@ if (passcode) {
   background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L0 100 ' stroke='black' stroke-width='1'/><path d='M0 0 L100 100 ' stroke='black' stroke-width='1'/></svg>");
   background-repeat: no-repeat;
   background-position: center center;
-//background-size: 100% 100%, auto; z-index: 1000000;
-  position: relative;
+//background-size: 100% 100%, auto; z-index: 1000000; position: relative;
 //color: red; cursor: pointer;
 }
 
