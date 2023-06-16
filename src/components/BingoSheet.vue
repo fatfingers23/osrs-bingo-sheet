@@ -23,7 +23,8 @@ const state = reactive({
   tile: {
     tileName: "",
     description: "",
-    picName: ""
+    picName: "",
+    portionCompleted: ""
   },
   search: '',
   teamName: '',
@@ -44,6 +45,7 @@ function openModal(item: LooseObject): void {
   state.tile.tileName = item.tileName;
   state.tile.description = item.description;
   state.tile.picName = item.picName;
+  state.tile.portionCompleted = item.portionCompleted;
 }
 
 function closeModal(): void {
@@ -51,7 +53,8 @@ function closeModal(): void {
   state.tile = {
     tileName: "",
     description: "",
-    picName: ""
+    picName: "",
+    portionCompleted: ""
   };
 }
 
@@ -76,9 +79,15 @@ const getCheckedTiles = (teamName: string) => {
               const gSheetRow = row as LooseObject;
               const teamCell = gSheetRow[teamName];
               if (reactiveBingo[index]) {
-                reactiveBingo[index].complete = teamCell == 1;
+                const completed = teamCell == 1
+                const bingoTile = reactiveBingo.find(x => x.itemName == gSheetRow.Item);
+                if (bingoTile) {
+                  bingoTile.complete = completed;
+                  if (!completed && teamCell != '') {
+                    bingoTile.portionCompleted = teamCell;
+                  }
+                }
               }
-
             })
           }
       ))
@@ -162,8 +171,9 @@ if (passcode) {
           <div class="tile-text line-through pt-4">{{ item.tileName }}</div>
         </div>
 
-        <div v-else class="bingo-tile" v-on:click="openModal(item)">
+        <div v-else class="bingo-tile text-center" v-on:click="openModal(item)">
           <img :src="`./tiles/${item.picName}.png`">
+          <span class="tile-text ">{{ item.portionCompleted }}</span>
         </div>
       </div>
 
@@ -184,8 +194,12 @@ if (passcode) {
             <div class="modal-box">
               <h3 class="font-bold text-lg">{{ state.tile.tileName }}</h3>
               <p class="py-4">{{ state.tile.description }}</p>
-              <div class="flex justify-center">
+              <div class="flex justify-center text-center">
                 <img :src="`./tiles/${state.tile.picName}.png`" alt="bingo tile">
+
+              </div>
+              <div v-show="state.tile.portionCompleted" class="text-center">
+                <p class="">{{ state.tile.portionCompleted }}</p>
               </div>
               <div class="modal-action">
                 <button v-on:click="closeModal" class="btn">close</button>
@@ -247,8 +261,7 @@ if (passcode) {
   background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L0 100 ' stroke='black' stroke-width='1'/><path d='M0 0 L100 100 ' stroke='black' stroke-width='1'/></svg>");
   background-repeat: no-repeat;
   background-position: center center;
-//background-size: 100% 100%, auto; z-index: 1000000; position: relative;
-//color: red; cursor: pointer;
+//background-size: 100% 100%, auto; z-index: 1000000; position: relative; //color: red; cursor: pointer;
 }
 
 .bingo-tile {
