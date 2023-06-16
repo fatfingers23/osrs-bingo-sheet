@@ -28,11 +28,11 @@ document.addEventListener('keyup', function (evt) {
     }
 });
 
-function openModal(item: LooseObject): void {
+function openModal(item: LooseObject, picIndex: string | number): void {
     state.modal = true;
     state.tile.tileName = item.tileName;
     state.tile.description = item.description;
-    state.tile.picName = item.picName
+    state.tile.picName = picIndex.toString()
 }
 
 function closeModal(): void {
@@ -115,7 +115,7 @@ const filterList = computed(() => {
                 </div>
             </div>
         </div>
-        <div class="md:p-10 p-5 grid gap-2 md:gap-4 grid-cols-2 grid-rows-2 md:grid-cols-4 md:grid-rows-4">
+        <div class="md:p-10 p-5 grid gap-2 md:gap-4 grid-cols-4 grid-rows-2 md:grid-cols-8 md:grid-rows-4">
             <div v-for="(item, index) in filterList" :key="index">
                 <div v-if="item.complete" class="bingo-tile done">
                     <!--        <img :src="`./tiles/${item.picName}.png`">-->
@@ -123,7 +123,7 @@ const filterList = computed(() => {
                     <div class="tile-text">{{ item.tileName }}</div>
                 </div>
 
-                <div v-else class="bingo-tile" v-on:click="openModal(item)">
+                <div v-else class="bingo-tile" v-on:click="openModal(item, index)">
                     <img :src="`./tiles/${index}.png`">
                 </div>
             </div>
