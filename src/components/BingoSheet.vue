@@ -11,13 +11,6 @@ interface LooseObject {
 const reactiveBingo = reactive(bingoSheet);
 
 
-//HACK God im so lazy. The pics are off by 1 cause i didnt want to write a script to deal with it
-let picIndex = 1;
-reactiveBingo.forEach(x => {
-    x.picName = picIndex;
-    picIndex++;
-})
-
 const state = reactive({
     modal: false,
     tile: {
@@ -89,8 +82,8 @@ const filterList = computed(() => {
     <div class="container p-3">
 
         <div class="text-center mt-10">
-            <h1 class="text-3xl">April Showers, Brings May Flash Bingo</h1>
-            <span> 00:00 UTC Sunday April 30th - 00:00 UTC Monday May 1st</span>
+            <h1 class="text-3xl">B-I-N-G-O</h1>
+            <span>00:00 Friday 16th of June (8pm EST Thurday) end Monday 26th of June 00:00 (Sunday 8pm EST)</span>
         </div>
         <!--  <h2>Team: {{teamName}}</h2>-->
         <div class="text-center mt-3">
@@ -98,31 +91,18 @@ const filterList = computed(() => {
         </div>
         <div class="p-6 md:p-10">
             <p class="">
-                1m entry for your first raffle ticket.
-                +1 ticket for every bingo tile you earn, 16 tiles total to gain!
+              Becky will post daily updates in your channels of how your team is doing and possibly updates of the whole spreadsheet after a couple of days if everybody is interested.
 
-                Three raffle prizes provided by the clan. However, more entries = more prizes! (Each member limited to
-                one
-                prize). Prizes below.
+              Make sure you read all the information Becky posted from adding you in the channel and follow the screenshots to tick untradeable's on/lowered chat announcement so nothing can be missed.
+
+              Becky will lower the clan announcements down to 100k cover all barrows drops and can increase as the event goes on once all the easier drops are claimed.
+
+              Besides that good luck, have fun, read all the above information and get ready to grind:)
 
             </p>
-            <div class="flex justify-center">
-                <ol class="list-decimal">
-                    <li>Armadyl Godsword</li>
-                    <li>Elder Maul</li>
-                    <li>Dragonfire Ward</li>
-                </ol>
-            </div>
+
             <p>
-                This is a SOLO event.
-                Bingo sheet will be released an hour before event.
-                Keyword will be posted at the start of the event.
-                Screenshots of items need to be posted in #botw-drops with the keyword visible.
-                Strongly encourage using WOM to display keyword when screenshotting drops. Feel free to contact me or
-                other
-                mods with any questions you may have.
-                I will do a live wheel spin in one of the voice chat channels to determine raffle winners for prizes.
-                I will do a live wheel spin in one of the voice chat channels to determine raffle winners for prizes.
+
             </p>
         </div>
         <div class="flex justify-center">
@@ -144,7 +124,7 @@ const filterList = computed(() => {
                 </div>
 
                 <div v-else class="bingo-tile" v-on:click="openModal(item)">
-                    <img :src="`./tiles/${item.picName}.png`">
+                    <img :src="`./tiles/${index}.png`">
                 </div>
             </div>
 

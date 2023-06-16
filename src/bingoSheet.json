@@ -1,68 +1,259 @@
 [
   {
-    "tileName": "Metal Boots",
-    "description": "Any Metal Boots: Any 1 of the metal boots (just one)",
-    "picName": 1,
+    "tileName": "Melee cape",
+    "description": "Fight caves in melee gear only (no thralls/veng)",
     "complete": false
   },
   {
-    "tileName": "KQ unique",
-    "description": "KQ Unique: Any KQ unique (Includes head)"
+    "tileName": "6x Barrows uniques",
+    "description": "Just armour pieces no racks"
   },
   {
-    "tileName": "GWD unique",
-    "description": "GWD Unique: Any GWD unique"
+    "tileName": "Zalcano Unique",
+    "description": ""
   },
   {
-    "tileName": "Zulrah unique",
-    "description": "Any Zulrah Unique"
+    "tileName": "Sarachnis Cudgel",
+    "description": ""
   },
   {
-    "tileName": "Elder robe piece",
-    "description": "Any Elder Chaos Robe: Just 1 piece"
+    "tileName": "3 x Dagganoth Kings rings",
+    "description": "Can be dupes"
   },
   {
-    "tileName": "Beginner shoes",
-    "description": "Beginner Clue Scroll Boots:  Any 1 footwear from beginner clue scroll"
+    "tileName": "Tempoross unique",
+    "description": "Barrel/tackle box/harpoon fish/tome of water"
   },
   {
-    "tileName": "Medium boots",
-    "description": "Any Medium Clue Footwear: Just 1"
+    "tileName": "3 x Cerberus crystals",
+    "description": "Or smouldering, dupes fine"
   },
   {
-    "tileName": "Revs unique",
-    "description": "Any Rev unique: 1"
+    "tileName": "Any boss pet",
+    "description": "Check POTW channel for what pets these inc"
   },
   {
-    "tileName": "Any pet",
-    "description": "Any Pet: excluding chompy pet"
+    "tileName": "Dark totem from scratch",
+    "description": "All 3 pieces (not a full one from skotizo)"
   },
   {
-    "tileName": "Tzhaar unique",
-    "description": "Any tzhaar unique drop: just 1"
+    "tileName": "Elegant piece from clues",
+    "description": ""
   },
   {
-    "tileName": "Demonic unique",
-    "description": "Demonic Gorilla Unique: just 1"
+    "tileName": "5 x whips",
+    "description": ""
   },
   {
-    "tileName": "Elite unique",
-    "description": "Any Elite clue unique: no shared rewards count"
+    "tileName": "25m total team xp tracked by wise old man",
+    "description": ""
   },
   {
-    "tileName": "Barrows unique",
-    "description": "Any Barrows unique: excluding bolt racks"
+    "tileName": "Uncut onyx",
+    "description": "Won't count towards zalcano unique"
   },
   {
-    "tileName": "Dks Unquie",
-    "description": "DKS unique: Any DKS unique (rings, dragon axe, seercrull, mud battlestaff)"
+    "tileName": "2 x unsireds",
+    "description": ""
   },
   {
-    "tileName": "Gauntlet unique",
-    "description": "Any Gauntlet Unique:"
+    "tileName": "Dragonstone armour piece",
+    "description": ""
   },
   {
-    "tileName": "Bone",
-    "description": "Long Bone or Curved Bone:"
+    "tileName": "Curved bone",
+    "description": ""
+  },
+  {
+    "tileName": "Brine Sabre",
+    "description": ""
+  },
+  {
+    "tileName": "Blood Shard",
+    "description": ""
+  },
+  {
+    "tileName": "3 x Occult Necklaces",
+    "description": ""
+  },
+  {
+    "tileName": "3 x Zulrah Uniques",
+    "description": "Onyx doesn't count, dupes allowed"
+  },
+  {
+    "tileName": "Dragon full helm",
+    "description": ""
+  },
+  {
+    "tileName": "3 x crystal seeds",
+    "description": "Any but must be from gauntlet"
+  },
+  {
+    "tileName": "Leaf-bladed battleaxe",
+    "description": ""
+  },
+  {
+    "tileName": "3 x boss heads",
+    "description": ""
+  },
+  {
+    "tileName": "Dark Mystic set",
+    "description": "5 pieces"
+  },
+  {
+    "tileName": "Any easy clue team cape",
+    "description": ""
+  },
+  {
+    "tileName": "Any boss jar",
+    "description": ""
+  },
+  {
+    "tileName": "Dragon thrown knives or throw axes",
+    "description": ""
+  },
+  {
+    "tileName": "Barbarian assault minigame unique",
+    "description": "Must be an item bought with points not coins"
+  },
+  {
+    "tileName": "Dragon Chainbody",
+    "description": ""
+  },
+  {
+    "tileName": "Hydra Leather",
+    "description": ""
+  },
+  {
+    "tileName": "Sceptre",
+    "description": ""
+  },
+  {
+    "tileName": "Any big fish",
+    "description": "Not harpoonfish"
+  },
+  {
+    "tileName": "Black mask",
+    "description": ""
+  },
+  {
+    "tileName": "Beginner clue Parrot",
+    "description": ""
+  },
+  {
+    "tileName": "Medium clue Ranger boots",
+    "description": ""
+  },
+  {
+    "tileName": "Superior imbued heart/Gem",
+    "description": ""
+  },
+  {
+    "tileName": "38, Gold Locks from shades of morton",
+    "description": ""
+  },
+  {
+    "tileName": "Dark Bow",
+    "description": ""
+  },
+  {
+    "tileName": "Shaman Mask",
+    "description": ""
+  },
+  {
+    "tileName": "Mask of Ranul",
+    "description": ""
+  },
+  {
+    "tileName": "GWD uniques x 5",
+    "description": "Includes nex, pets aren't uniques"
+  },
+  {
+    "tileName": "5 x Egg Sac's",
+    "description": ""
+  },
+  {
+    "tileName": "Mystic dusk piece",
+    "description": ""
+  },
+  {
+    "tileName": "Ancient Ceremonial robes piece",
+    "description": ""
+  },
+  {
+    "tileName": "Elven Signet",
+    "description": ""
+  },
+  {
+    "tileName": "Byro Essence",
+    "description": ""
+  },
+  {
+    "tileName": "3 x Champion scrolls",
+    "description": "Can be dupes"
+  },
+  {
+    "tileName": "Mudskipper hat and Flippers",
+    "description": ""
+  },
+  {
+    "tileName": "Ornate handle (LMS)",
+    "description": ""
+  },
+  {
+    "tileName": "Any revs unique weapons/necklace/emblems",
+    "description": ""
+  },
+  {
+    "tileName": "3 x demonic gorilla uniques",
+    "description": ""
+  },
+  {
+    "tileName": "Dragon Pickaxe",
+    "description": ""
+  },
+  {
+    "tileName": "Robin Hood Hat",
+    "description": ""
+  },
+  {
+    "tileName": "Skilling pet",
+    "description": "See POTW channel (no chompy bird)"
+  },
+  {
+    "tileName": "3x Tzhaar Uniques",
+    "description": ""
+  },
+  {
+    "tileName": "Dragon Warhammer",
+    "description": ""
+  },
+  {
+    "tileName": "3 x Wilderness weapon upgrades",
+    "description": "Claw/fang/skull (no dupes)"
+  },
+  {
+    "tileName": "2 x TOA purples",
+    "description": ""
+  },
+  {
+    "tileName": "2 x COX purples",
+    "description": ""
+  },
+  {
+    "tileName": "Nex unique",
+    "description": ""
+  },
+  {
+    "tileName": "Any sigil from Corporal beast",
+    "description": ""
+  },
+  {
+    "tileName": "Dragonbone Necklace",
+    "description": ""
+  },
+  {
+    "tileName": "Rune set x 5",
+    "description": "Full helm, Platebody, Legs/skirt, Boots, Rune Kiteshield"
   }
 ]
