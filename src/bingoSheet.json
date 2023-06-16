@@ -140,12 +140,12 @@
   {
     "tileName": "Dragon thrown knives or throw axes",
     "description": "",
-    "itemName": ""
+    "itemName": "Dragon knives/thrownaxes"
   },
   {
     "tileName": "Barbarian assault minigame unique",
     "description": "Must be an item bought with points not coins",
-    "itemName": ""
+    "itemName": "Barbarian assault log slot"
   },
   {
     "tileName": "Dragon Chainbody",
