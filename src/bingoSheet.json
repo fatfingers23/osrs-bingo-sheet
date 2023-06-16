@@ -2,7 +2,8 @@
   {
     "tileName": "Melee cape",
     "description": "Fight caves in melee gear only (no thralls/veng)",
-    "complete": false
+    "complete": false,
+    "picName": ""
   },
   {
     "tileName": "6x Barrows uniques",
