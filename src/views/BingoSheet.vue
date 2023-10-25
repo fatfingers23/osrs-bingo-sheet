@@ -116,7 +116,8 @@ if (passcode) {
 
 }
 
-
+const start = new Date("2023-11-03T00:00:00Z")
+const end = new Date("2023-11-13T00:00:00Z")
 </script>
 
 <template>
@@ -126,7 +127,7 @@ if (passcode) {
 
     <div class="text-center mt-10">
       <h1 class="text-3xl">Insomniacs vs Legacy of War B-I-N-G-O</h1>
-      <span>Friday the 3rd of November 00:00 UTC (8pm EST Thurday the 2nd) till Monday the 13th of November 00:00 UTC (7pm EST Sunday the 12th)</span>
+      <span class="text-1xl font-bold">{{start.toLocaleString()}} till {{end.toLocaleString()}}</span>
     </div>
     <div class="text-center mt-3 mb-2">
       <h1 class="text-3xl" v-show="state.teamName != ''">Team: {{ state.teamName}}</h1>
