@@ -30,7 +30,7 @@
   {
     "tileName": "Brimstone ring",
     "description": "Hydra's Eye, Hydra's Heart, Hydra's Fang",
-    "itemName": "Brimstone Ring"
+    "itemName": "Brimstone ring"
   },
   {
     "tileName": "Beginner shoe set",
@@ -38,9 +38,9 @@
     "itemName": "Beginner shoe set"
   },
   {
-    "tileName": "Corporeal Beast Sigil",
+    "tileName": "Corpreal Sigil",
     "description": "Spectral Sigil, Arcane Sigil, Elysian Sigil",
-    "itemName": "Corpreal Sigil"
+    "itemName": "Corporeal Beast Sigil"
   },
   {
     "tileName": "CM/HM Kit",
@@ -48,9 +48,9 @@
     "itemName": "Cm/Hm kit"
   },
   {
-    "tileName": "Cerberus Crystal Set",
+    "tileName": "Cerberus Crystal set",
     "description": "Primordial Crystal, Pegasian Crystal, Eternal Crystal, Smouldering Stone",
-    "itemName": "Cerb Crystal set"
+    "itemName": "Cerberus Crystal Set"
   },
   {
     "tileName": "Champion Scroll Set",
@@ -58,24 +58,24 @@
     "itemName": "Champion Scroll Set"
   },
   {
-    "tileName": "DK ring set",
+    "tileName": "4 DK Rings",
     "description": "Archers ring, Berserker ring, Seer's Ring, Warrior Ring",
-    "itemName": "4 DK Rings"
+    "itemName": "DK ring set"
   },
   {
-    "tileName": "DT2 Virtus Set",
+    "tileName": "Virtus Robes",
     "description": "Virtus Robe set mask, robe top, robe bottom",
-    "itemName": "Virtus Robes"
+    "itemName": "DT2 Virtus Set"
   },
   {
-    "tileName": "DT2 Vestige",
-    "description": "Magus Vestige, Ultor Vestige, Venator Vestige, Bellator Vestige ",
-    "itemName": "DT2 Ring piece"
+    "tileName": "DT2 Ring piece",
+    "description": "Magus Vestige, Ultor Vestige, Venator Vestige, or Bellator Vestige ",
+    "itemName": "DT2 Vestige"
   },
   {
-    "tileName": "Dagon'hai piece",
+    "tileName": "Dragon Hai piece",
     "description": " Any Dagon'hai piece",
-    "itemName": "Dragon Hai piece"
+    "itemName": "Dagon'hai piece"
   },
   {
     "tileName": "Eternal Glory",
@@ -98,9 +98,9 @@
     "itemName": "Golden Tench"
   },
   {
-    "tileName": "Gauntlet 10 armour/wep or enhanced",
+    "tileName": "Gauntlet",
     "description": "10 armour seeds/wep OR Enchanced Wep seed",
-    "itemName": "Gaunlet"
+    "itemName": "Gauntlet 10 armour/wep or enhanced"
   },
   {
     "tileName": "Hydra's Claw",
@@ -118,19 +118,19 @@
     "itemName": "Lantern or Needle from GOTR"
   },
   {
-    "tileName": "Nex unique",
-    "description": "Any Torva piece, Vambs, Horn, Hilt",
-    "itemName": "NEX"
+    "tileName": "Any Nex unique",
+    "description": "Any Torva piece, Vambs, Horn, or Hilt",
+    "itemName": "Nex unique"
   },
   {
     "tileName": "Nightmare unique",
-    "description": "Any orb, Any inquisitors piece, Staff",
-    "itemName": "Nightmare"
+    "description": "Valid unique's are… orb, Any inquisitors piece, or Staff",
+    "itemName": "Nightmare unique"
   },
   {
-    "tileName": "Obsidian armour set",
+    "tileName": "Full Obsidian",
     "description": "Obsidian armour set (top + bottom + helm)",
-    "itemName": "Obsidian"
+    "itemName": "Obsidian armour set"
   },
   {
     "tileName": "PVM pet",
@@ -138,9 +138,9 @@
     "itemName": "PVM Pet"
   },
   {
-    "tileName": "Revs weapon",
+    "tileName": "Rev's weapon",
     "description": "Chainmace, Bow, Staff",
-    "itemName": "Rev Wep"
+    "itemName": "Revs weapon"
   },
   {
     "tileName": "Ranger boots",
@@ -183,9 +183,9 @@
     "itemName": "Tome of water and fire"
   },
   {
-    "tileName": "Odium and Malediction shields",
+    "tileName": "Wilderness shields",
     "description": "Odium shard 1/2/3 and Malediction shard 1/2/3",
-    "itemName": "Wilderness shields"
+    "itemName": "Odium and Malediction shields"
   },
   {
     "tileName": "Venator bow",
@@ -198,9 +198,9 @@
     "itemName": "Voidwaker"
   },
   {
-    "tileName": "Any visage",
+    "tileName": "Visage",
     "description": "Skeletal Visage, Wyvern Visage, Draconinc visage (no serp visage)",
-    "itemName": "Visage"
+    "itemName": "Any Visage"
   },
   {
     "tileName": "All Zulrah' Uniques",
@@ -213,28 +213,28 @@
     "itemName": "5 Zenytes or ALL OTHER Demonics' uniques"
   },
   {
-    "tileName": "5 zenytes or all demonics uniques",
+    "tileName": "Demonic Gorilla",
     "description": "Zenyte, Ballista Limbs, light frame, heavy frame monkey tail",
-    "itemName": "Demonic Gorilla"
+    "itemName": "5 zenytes or all demonics uniques"
   },
   {
-    "tileName": "3X Cox purples",
+    "tileName": "Chambers",
     "description": "Any 3 Cox purple",
-    "itemName": "Chambers"
+    "itemName": "3X Cox purples"
   },
   {
-    "tileName": "3X ToA purples",
+    "tileName": "ToA",
     "description": "Any 3 Toa purples",
-    "itemName": "ToA"
+    "itemName": "3X ToA purples"
   },
   {
-    "tileName": "3X ToB purples",
+    "tileName": "ToB purple",
     "description": "Any 3 tob purples",
-    "itemName": "ToB purple"
+    "itemName": "3X ToB purples"
   },
   {
     "tileName": "200M Total clan XP",
     "description": "200m Total bingo team xp",
-    "itemName": "200m XP"
+    "itemName": "200M Total clan XP"
   }
 ]

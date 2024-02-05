@@ -75,13 +75,12 @@ const getCheckedTiles = (teamName: string) => {
           gsheet => {
             const parsedSheet = Papa.parse(gsheet, {header: true});
 
-            console.log(parsedSheet);
             parsedSheet.data.forEach((row, index) => {
               const gSheetRow = row as LooseObject;
               const teamCell = gSheetRow[teamName];
               if (reactiveBingo[index]) {
                 const completed = teamCell == 1
-                const bingoTile = reactiveBingo.find(x => x.itemName == gSheetRow.Item);
+                const bingoTile = reactiveBingo.find(x => x.itemName.toLowerCase() == gSheetRow.Item.toLowerCase());
                 if (bingoTile) {
                   bingoTile.complete = completed;
                   if (!completed && teamCell != '') {
@@ -101,17 +100,13 @@ if (passcode) {
       .then(x => x.text().then(
           gsheet => {
             const parsedSheet = Papa.parse(gsheet, {header: true}) as LooseObject;
-            console.log(parsedSheet.data)
             const teamName = parsedSheet.data.find((x: {
               [x: string]: string | string[];
             }) => x['Passcode'] === passcode);
-            console.log(teamName);
             if (teamName) {
-
               state.teamName = teamName.Team
               getCheckedTiles(teamName.Team);
             }
-
           }
       ))
 
