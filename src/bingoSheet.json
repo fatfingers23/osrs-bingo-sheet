@@ -203,18 +203,18 @@
     "itemName": "Any Visage"
   },
   {
+    "tileName": "Zalcano unique",
+    "description": "Tool seed, uncut onyx (doesnt count for zulrah) or zalcano shard.\n",
+    "itemName": "Zalcano unique"
+  },
+  {
     "tileName": "All Zulrah' Uniques",
     "description": "Tanzanite fang, magic fang, sepentine visage and uncut onyx",
     "itemName": "All zulrah uniques"
   },
   {
-    "tileName": "5 zenytes or all demonics uniques",
-    "description": "5 Zenytes or Ballista Limbs, Ballista Spring, Light Frame, Heavy Frame, Monkey Tail",
-    "itemName": "5 Zenytes or ALL OTHER Demonics' uniques"
-  },
-  {
     "tileName": "Demonic Gorilla",
-    "description": "Zenyte, Ballista Limbs, light frame, heavy frame monkey tail",
+    "description": "5 Zenytes or Ballista Limbs, Ballista Spring, Light Frame, Heavy Frame, Monkey Tail",
     "itemName": "5 zenytes or all demonics uniques"
   },
   {
