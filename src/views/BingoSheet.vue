@@ -70,11 +70,12 @@ const route = useRoute()
 const passcode = route.params.passcode;
 
 const getCheckedTiles = (teamName: string) => {
-  fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vReFzeeRz6pVyPB8G1PoDuXDgyFWXD0aiBj36cFxQfRo_RfHuTwq6sqbvUHarhPNDAKals24dkq58pm/pub?gid=0&single=true&output=csv")
+  fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vRaxpQIerRi5oUwZkzHmhZCdx8lxpq9d4HL-H38UDj0G6pYgVYJhWrKBECZWjQ61ijlwvry11ZiUbuX/pub?gid=0&single=true&output=csv")
       .then(x => x.text().then(
           gsheet => {
             const parsedSheet = Papa.parse(gsheet, {header: true});
 
+            console.log(parsedSheet);
             parsedSheet.data.forEach((row, index) => {
               const gSheetRow = row as LooseObject;
               const teamCell = gSheetRow[teamName];
@@ -96,10 +97,11 @@ const getCheckedTiles = (teamName: string) => {
 //
 if (passcode) {
 
-  fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vReFzeeRz6pVyPB8G1PoDuXDgyFWXD0aiBj36cFxQfRo_RfHuTwq6sqbvUHarhPNDAKals24dkq58pm/pub?gid=32278501&single=true&output=csv")
+  fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vRaxpQIerRi5oUwZkzHmhZCdx8lxpq9d4HL-H38UDj0G6pYgVYJhWrKBECZWjQ61ijlwvry11ZiUbuX/pub?gid=32278501&single=true&output=csv")
       .then(x => x.text().then(
           gsheet => {
             const parsedSheet = Papa.parse(gsheet, {header: true}) as LooseObject;
+            console.log(parsedSheet.data)
             const teamName = parsedSheet.data.find((x: {
               [x: string]: string | string[];
             }) => x['Passcode'] === passcode);
@@ -116,8 +118,8 @@ if (passcode) {
 
 }
 
-const start = new Date("2023-11-03T00:00:00Z")
-const end = new Date("2023-11-13T00:00:00Z")
+const start = new Date("2024-02-16T18:00:00Z")
+const end = new Date("2024-02-26T00:00:00Z")
 </script>
 
 <template>
@@ -126,7 +128,7 @@ const end = new Date("2023-11-13T00:00:00Z")
   <div class="p-3">
 
     <div class="text-center mt-10">
-      <h1 class="text-3xl">Insomniacs vs Legacy of War B-I-N-G-O</h1>
+      <h1 class="text-3xl">Insomniacs vs Hurt B-I-N-G-O</h1>
       <span class="text-1xl font-bold">{{start.toLocaleString()}} till {{end.toLocaleString()}}</span>
     </div>
     <div class="text-center mt-3 mb-2">
@@ -165,7 +167,7 @@ const end = new Date("2023-11-13T00:00:00Z")
         </div>
 
         <div v-else class="bingo-tile text-center" v-on:click="openModal(item)">
-          <img :src="`./tiles/${item.picName}.jpg`">
+          <img :src="`./tiles/${item.picName}.png`">
           <span v-if="item.portionCompleted !== '0'" class="tile-text ">{{ item.portionCompleted }}</span>
         </div>
       </div>
@@ -188,7 +190,7 @@ const end = new Date("2023-11-13T00:00:00Z")
               <h3 class="font-bold text-lg">{{ state.tile.tileName }}</h3>
               <p class="py-4">{{ state.tile.description }}</p>
               <div class="flex justify-center text-center">
-                <img :src="`./tiles/${state.tile.picName}.jpg`" alt="bingo tile">
+                <img :src="`./tiles/${state.tile.picName}.png`" alt="bingo tile">
 
               </div>
               <div v-show="state.tile.portionCompleted" class="text-center">

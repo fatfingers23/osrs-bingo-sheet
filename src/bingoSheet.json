@@ -1,171 +1,96 @@
 [
   {
-    "tileName": "Hardmode Kit",
-    "description": "Any one Hardmode Kit (Sanguine ornament kit, Twisted ancestral colour kit, or Holy ornament kit)",
-    "itemName": "Hardmode Kit",
+    "tileName": "Acb and Saradomin Hilt",
+    "description": "Armadyl crossbow & Saradomin Hilt",
+    "itemName": "Acb and Saradomin Hilt",
     "complete": false,
     "picName": "",
     "portionCompleted": ""
   },
   {
-    "tileName": "x2 ToA purples",
-    "description": "Any 2 TOA purples (No Ring and Fang)",
-    "itemName": "ToA purples x 2 "
-  },
-  {
-    "tileName": "CoX 2x",
-    "description": "Any 2 CoX purples (No Scrolls)",
-    "itemName": "CoX purples x 2"
-  },
-  {
-    "tileName": "ToB 2x",
-    "description": "Any 2 TOB purples (No Justi or Avernic)",
-    "itemName": "ToB purples x 2"
-  },
-  {
-    "description": "Revs weapon (mace, craw's, sceptre)",
-    "tileName": "Any of the 3 weapons",
-    "itemName": "Revs Weapon"
-  },
-  {
-    "tileName": "Nightmare unique",
-    "description": "Any Nightmare unique (including nightmare staff)",
-    "itemName": "Nightmare"
-  },
-  {
-    "tileName": "Nex unique",
-    "description": "Any Nex unique",
-    "itemName": "Nex"
-  },
-  {
-    "tileName": "Jar of Darkness",
-    "description": "Jar of Darkness from Skotizo",
-    "itemName": "Jar of Darkness"
-  },
-  {
-    "tileName": "Spirit Shield",
-    "description": "Complete Spirit shield, (any sigil + spirit Shield +holy elixir)",
-    "itemName": "Spirit Shield"
-  },
-  {
-    "tileName": "Voidwaker",
-    "description": "all 3 voidwaker pieces",
-    "itemName": "Voidwaker"
-  },
-  {
-    "tileName": "Vorkath unique",
-    "description": "Any vorkath unique (not inc vorkath head)",
-    "itemName": "Vorkath"
-  },
-  {
-    "tileName": "DT2 Rings or Virtus piece",
-    "description": "any DT2 ring or virtus piece",
-    "itemName": "DT2"
-  },
-  {
-    "tileName": "Zulrah Set",
-    "description": "Zulrah set (tanzanite fang, magic fang, serpentine visage, uncut onyx and +1 either mutagen)",
-    "itemName": "Zulrah"
+    "tileName": "Armadyl set",
+    "description": "Helmet, Chainbody, Chainskirt",
+    "itemName": "Armadyl set"
   },
   {
     "tileName": "Bandos Set",
-    "description": "Bandos set (bcp + tassets + boots)",
+    "description": "Bcp, Tassets, Boots",
     "itemName": "Bandos Set"
   },
   {
-    "tileName": "Dk Rings",
-    "description": " DK rings (berserker + warrior + seers + archers ring)",
-    "itemName": "DK Rings"
+    "tileName": "Basilisk Jaw",
+    "description": "Basilisk Jaw",
+    "itemName": "Basilisk Jaw"
   },
   {
-    "tileName": "Venator Bow",
-    "description": "venator bow (5 x venator shards)",
-    "itemName": "Venator Bow"
+    "tileName": "Blood Shard",
+    "description": "Blood Shard Thieve or Kill",
+    "itemName": "Blood Shard"
   },
   {
-    "tileName": "Trident & Tentacle",
-    "description": "Kraken set (trident + tent",
-    "itemName": "Kraken"
+    "tileName": "Brimstone ring",
+    "description": "Hydra's Eye, Hydra's Heart, Hydra's Fang",
+    "itemName": "Brimstone Ring"
   },
   {
-    "tileName": "Cerberus uniques",
-    "description": "cerberus crystals (eternal + pegasion + prims + smouldering)",
-    "itemName": "Cerb x 4"
+    "tileName": "Beginner shoe set",
+    "description": "Mole slippers, Frog slippers, Bear feet, Demon feet",
+    "itemName": "Beginner shoe set"
   },
   {
-    "tileName": "10x fire capes or 2x infernal capes",
-    "description": "10 x firecapes or 2 x inferno",
-    "itemName": "Capes"
+    "tileName": "Corporeal Beast Sigil",
+    "description": "Spectral Sigil, Arcane Sigil, Elysian Sigil",
+    "itemName": "Corpreal Sigil"
   },
   {
-    "tileName": "Cudgel & Eggs",
-    "description": "20 x sarachnis eggs + cudgel",
-    "itemName": "Cudgel & Eggs"
+    "tileName": "CM/HM Kit",
+    "description": "Twisted Ancestral Colour kit Or Holy ornament kit/ Sanguine ornament kit",
+    "itemName": "Cm/Hm kit"
   },
   {
-    "tileName": "Ring of endurance",
-    "description": "ring of endurance",
+    "tileName": "Cerberus Crystal Set",
+    "description": "Primordial Crystal, Pegasian Crystal, Eternal Crystal, Smouldering Stone",
+    "itemName": "Cerb Crystal set"
+  },
+  {
+    "tileName": "Champion Scroll Set",
+    "description": "Earth warrior, Ghoul, Giant, Goblin, Hobgobilin, imp, Jogre, Lessar Demon, Skeleton, Zombie",
+    "itemName": "Champion Scroll Set"
+  },
+  {
+    "tileName": "DK ring set",
+    "description": "Archers ring, Berserker ring, Seer's Ring, Warrior Ring",
+    "itemName": "4 DK Rings"
+  },
+  {
+    "tileName": "DT2 Virtus Set",
+    "description": "Virtus Robe set mask, robe top, robe bottom",
+    "itemName": "Virtus Robes"
+  },
+  {
+    "tileName": "DT2 Vestige",
+    "description": "Magus Vestige, Ultor Vestige, Venator Vestige, Bellator Vestige ",
+    "itemName": "DT2 Ring piece"
+  },
+  {
+    "tileName": "Dagon'hai piece",
+    "description": " Any Dagon'hai piece",
+    "itemName": "Dragon Hai piece"
+  },
+  {
+    "tileName": "Eternal Glory",
+    "description": "Eternal Glory",
+    "itemName": "Eternal Glory"
+  },
+  {
+    "tileName": "Ring of Endurance",
+    "description": "Ring of Endurance",
     "itemName": "Ring of Endurance"
   },
   {
-    "tileName": "Blessed d'hide set",
-    "description": "blessed d'hide set (same god, top + bottoms + boots)",
-    "itemName": "Blessed d'hide"
-  },
-  {
-    "tileName": "Zalcano unique",
-    "description": "Any zalcano unique",
-    "itemName": "Zalcano"
-  },
-  {
-    "tileName": "Pharaoh's Sceptre",
-    "description": "pharaoh's sceptre",
-    "itemName": "Sceptre"
-  },
-  {
-    "tileName": "Tome of fire + Tome of water",
-    "description": "Tome of fire + Tome of water",
-    "itemName": "Two Tomes"
-  },
-  {
-    "tileName": "50m Exp",
-    "description": "50M XP tracked by wise old man",
-    "itemName": "50m Exp"
-  },
-  {
-    "tileName": "Odium and Malediction ward",
-    "description": "full odium and malediction wards (shard 1+2+3 of both shields)",
-    "itemName": "Full Wards"
-  },
-  {
-    "tileName": "Club + byro essence",
-    "description": "Hill giant club + bryo essence",
-    "itemName": "F2P Weapons"
-  },
-  {
-    "tileName": "Elder chaos robes",
-    "description": "Full set of Chaos robes (top + bottom + hood)",
-    "itemName": "Chaos Robes"
-  },
-  {
-    "tileName": "Curved Bone",
-    "description": "Curved Bone",
-    "itemName": "Curved Bone"
-  },
-  {
-    "tileName": "Obsidian Set",
-    "description": "Obsidian armour set (top + bottom + helm)",
-    "itemName": "Obsidian"
-  },
-  {
-    "tileName": "Dragon Pickaxe + Broken",
-    "description": "Dragon pickaxe + broken dragon pickaxe (need both)",
-    "itemName": "Dragon Pickaxe"
-  },
-  {
-    "tileName": "PvM Pet",
-    "description": "PVM pet (no Chaos ele, skotizo or chompy)",
-    "itemName": "PvM Pet"
+    "tileName": "Elven Signet",
+    "description": "Elven Signet",
+    "itemName": "Elven Signet"
   },
   {
     "tileName": "Golden Tench",
@@ -173,18 +98,143 @@
     "itemName": "Golden Tench"
   },
   {
-    "tileName": "Hydra Claw",
-    "description": "Hydra Claw",
-    "itemName": "Hydra Claw"
+    "tileName": "Gauntlet 10 armour/wep or enhanced",
+    "description": "10 armour seeds/wep OR Enchanced Wep seed",
+    "itemName": "Gaunlet"
   },
   {
-    "tileName": "10x Barrows",
-    "description": "10x barrows uniques (dupes allowed)",
-    "itemName": "Barrows x10"
+    "tileName": "Hydra's Claw",
+    "description": "Hydra's Claw",
+    "itemName": "Hydra's Claw"
   },
   {
-    "tileName": "enhanced crystal weapon",
-    "description": "enhanced crystal weapon",
-    "itemName": "Enhanced Crystal Weapon"
+    "tileName": "Jad Gm time",
+    "description": "Grandmaster Jad time 26:30",
+    "itemName": "Jad GM Time"
+  },
+  {
+    "tileName": "Lantern or Needle from GOTR",
+    "description": "Lantern or Needle from GOTR",
+    "itemName": "Lantern or Needle from GOTR"
+  },
+  {
+    "tileName": "Nex unique",
+    "description": "Any Torva piece, Vambs, Horn, Hilt",
+    "itemName": "NEX"
+  },
+  {
+    "tileName": "Nightmare unique",
+    "description": "Any orb, Any inquisitors piece, Staff",
+    "itemName": "Nightmare"
+  },
+  {
+    "tileName": "Obsidian armour set",
+    "description": "Obsidian armour set (top + bottom + helm)",
+    "itemName": "Obsidian"
+  },
+  {
+    "tileName": "PVM pet",
+    "description": "Any PVM pet (no skotizo, chaos ele)",
+    "itemName": "PVM Pet"
+  },
+  {
+    "tileName": "Revs weapon",
+    "description": "Chainmace, Bow, Staff",
+    "itemName": "Rev Wep"
+  },
+  {
+    "tileName": "Ranger boots",
+    "description": "Ranger boots",
+    "itemName": "Ranger boots"
+  },
+  {
+    "tileName": "Rat pet",
+    "description": "Rat pet (DOES NOT COUNT AS PVM PET, SEPERATE TILE)",
+    "itemName": "Rat Pet"
+  },
+  {
+    "tileName": "Tumeken's Shadow from TOA",
+    "description": "Tumeken's Shadow from TOA (counts towards toa purple tile)",
+    "itemName": "Tumeken's Shadow from TOA"
+  },
+  {
+    "tileName": "Smoke battlestaff/Occult",
+    "description": "FROM Thermonuclear Smoke Devil (BOSS)",
+    "itemName": "Smoke battlestaff/occult"
+  },
+  {
+    "tileName": "Sarachnis cudgel",
+    "description": "Sarachnis cudgel",
+    "itemName": "Sarachnis cudgel"
+  },
+  {
+    "tileName": "Superior unique",
+    "description": "Heart/Gem/Dust staff/Mist staff",
+    "itemName": "Superior unique"
+  },
+  {
+    "tileName": "Skilling pet",
+    "description": "Any skilling pet(wt/temp included) NO CHOMPY PET",
+    "itemName": "Skilling pet"
+  },
+  {
+    "tileName": "Tome of water and fire",
+    "description": "Tome of water and fire",
+    "itemName": "Tome of water and fire"
+  },
+  {
+    "tileName": "Odium and Malediction shields",
+    "description": "Odium shard 1/2/3 and Malediction shard 1/2/3",
+    "itemName": "Wilderness shields"
+  },
+  {
+    "tileName": "Venator bow",
+    "description": "Venator bow",
+    "itemName": "Venator bow"
+  },
+  {
+    "tileName": "Voidwaker",
+    "description": "Voidwaker Hilt, Blade, Gem",
+    "itemName": "Voidwaker"
+  },
+  {
+    "tileName": "Any visage",
+    "description": "Skeletal Visage, Wyvern Visage, Draconinc visage (no serp visage)",
+    "itemName": "Visage"
+  },
+  {
+    "tileName": "All Zulrah' Uniques",
+    "description": "Tanzanite fang, magic fang, sepentine visage and uncut onyx",
+    "itemName": "All zulrah uniques"
+  },
+  {
+    "tileName": "5 zenytes or all demonics uniques",
+    "description": "5 Zenytes or Ballista Limbs, Ballista Spring, Light Frame, Heavy Frame, Monkey Tail",
+    "itemName": "5 Zenytes or ALL OTHER Demonics' uniques"
+  },
+  {
+    "tileName": "5 zenytes or all demonics uniques",
+    "description": "Zenyte, Ballista Limbs, light frame, heavy frame monkey tail",
+    "itemName": "Demonic Gorilla"
+  },
+  {
+    "tileName": "3X Cox purples",
+    "description": "Any 3 Cox purple",
+    "itemName": "Chambers"
+  },
+  {
+    "tileName": "3X ToA purples",
+    "description": "Any 3 Toa purples",
+    "itemName": "ToA"
+  },
+  {
+    "tileName": "3X ToB purples",
+    "description": "Any 3 tob purples",
+    "itemName": "ToB purple"
+  },
+  {
+    "tileName": "200M Total clan XP",
+    "description": "200m Total bingo team xp",
+    "itemName": "200m XP"
   }
-  ]
+]
