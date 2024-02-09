@@ -14,11 +14,15 @@ dist-ssr
 coverage
 *.local
 
+# Generated files
+/data/
+/__pycache__/
+
 /cypress/videos/
 /cypress/screenshots/
 
 # Editor directories and files
-.vscode/*
+../.vscode/extensions.json
 !.vscode/extensions.json
 .idea
 *.suo
