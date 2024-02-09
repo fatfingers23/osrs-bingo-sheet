@@ -22,7 +22,7 @@ __pycache__
 /cypress/screenshots/
 
 # Editor directories and files
-../.vscode/extensions.json
+.vscode/*
 !.vscode/extensions.json
 .idea
 *.suo
