@@ -16,7 +16,7 @@ coverage
 
 # Generated files
 /data/
-/__pycache__/
+__pycache__
 
 /cypress/videos/
 /cypress/screenshots/
