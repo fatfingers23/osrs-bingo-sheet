@@ -1,5 +1,7 @@
 """
-Parses and contains configuration data for use in other modules
+Parses and contains configuration data for use in other modules.
+
+TODO: Make this module less hard coded to support specifying differing config files at runtime in the future
 """
 import configobj
 
