@@ -77,11 +77,12 @@ const getCheckedTiles = () => {
 		})
 		.then((tiles: any) => {
 			let i = 0;
-			Object.entries(tiles).forEach((name: any, value: any) => {
-				console.log(name + " " + value);
+			console.log(JSON.stringify(tiles));
+			Object.entries(tiles).forEach(tile => {
+				const [name, value] = tile;
 
-				if (reactiveBingo[i]) {
-                	const bingoTile = reactiveBingo.find(x => x.itemName.toLowerCase() == "SARA".toLowerCase());
+				if (reactiveBingo[i] && name !== "TeamName") {
+                	const bingoTile = reactiveBingo.find(x => x.tileName.toLowerCase() === name.toLowerCase());
                 	if (bingoTile) {
                   		bingoTile.complete = true;
                 	}
