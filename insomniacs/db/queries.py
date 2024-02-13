@@ -175,3 +175,7 @@ class Query(str):
         """
         return self.ENCLOSE('"', arg, '"')
 
+
+TEAM_TILE_QUERY = str(Query().
+     SELECT.ALL.FROM("bingo_data").WHERE("TeamName").EQUAL("%s")
+     )

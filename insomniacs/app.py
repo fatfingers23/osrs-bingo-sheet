@@ -4,7 +4,7 @@ import logging
 import flask_login
 import flask
 from flask import Flask, jsonify, send_file, abort
-from insomniacs.db.actions import query_database, init_table_from_config, MysqlConnection
+from insomniacs.db.actions import query_database, init_table_from_config, MysqlConnection, get_tiles
 from insomniacs.db.login import User, auth_user, check_for_username
 from insomniacs.configuration import Teams
 from insomniacs.db.queries import Query
@@ -84,7 +84,7 @@ def login():
     user = User(flask.request.form['username'], flask.request.form['password'])
     if auth_user(user):
         flask_login.login_user(user)
-        return flask.redirect(flask.url_for('home'))
+        return flask.redirect(flask.url_for('/home'))
 
     return 'Bad login'
 
@@ -96,7 +96,7 @@ def logout():
     Logs the user out.
     """
     flask_login.logout_user()
-    return flask.redirect(flask.url_for('login'))
+    return flask.redirect(flask.url_for('/login'))
 
 
 @app.route('/teams-tiles')
@@ -118,8 +118,4 @@ def tile_query():
     if team != flask_login.current_user.get_id():
         abort(401)
 
-    q = (Query().
-         SELECT.ALL.FROM("bingo_data").WHERE("TeamName").EQUAL("%s")
-         )
-    tiles = query_database(q, (team,))
-    return jsonify(tiles)
+    return jsonify(get_tiles(team))

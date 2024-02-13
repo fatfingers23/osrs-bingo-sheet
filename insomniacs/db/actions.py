@@ -8,7 +8,7 @@ import atexit
 import mysql.connector
 from enum import StrEnum
 from insomniacs.configuration import DatabaseConfig, Tiles, Teams
-from insomniacs.db.queries import Query
+from insomniacs.db.queries import Query, TEAM_TILE_QUERY
 
 import sys
 import logging
@@ -107,3 +107,22 @@ def init_table_from_config(config=Teams):
     cursor.execute(populate_table.format(formatted_teams=formatted_teams))
     cursor.close()
     MysqlConnection().commit()
+
+
+def get_tiles(team):
+    """
+    Grabs the current state of the given team's tiles
+
+    :param team: Name of the team to get tiles for
+    :return: dict of {<tile name>: <int representing completion>}
+    """
+    if team not in Teams:
+        logger.error("%s is not in Teams (%s)", team, Teams)
+        return None
+
+    cursor = MysqlConnection().cursor(buffered=True)
+    cursor.execute(TEAM_TILE_QUERY, (team,))
+    logger.debug("Running get_tiles with input:\n\t%s", cursor.statement)
+    results = dict(zip(cursor.column_names, cursor.fetchone()))
+    cursor.close()
+    return results

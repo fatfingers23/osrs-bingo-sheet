@@ -69,49 +69,31 @@ const filterList = computed(() => {
 const route = useRoute()
 const passcode = route.params.passcode;
 
-const getCheckedTiles = (teamName: string) => {
-  fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vRaxpQIerRi5oUwZkzHmhZCdx8lxpq9d4HL-H38UDj0G6pYgVYJhWrKBECZWjQ61ijlwvry11ZiUbuX/pub?gid=0&single=true&output=csv")
-      .then(x => x.text().then(
-          gsheet => {
-            const parsedSheet = Papa.parse(gsheet, {header: true});
 
-            parsedSheet.data.forEach((row, index) => {
-              const gSheetRow = row as LooseObject;
-              const teamCell = gSheetRow[teamName];
-              if (reactiveBingo[index]) {
-                const completed = teamCell == 1
-                const bingoTile = reactiveBingo.find(x => x.itemName.toLowerCase() == gSheetRow.Item.toLowerCase());
-                if (bingoTile) {
-                  bingoTile.complete = completed;
-                  if (!completed && teamCell != '') {
-                    bingoTile.portionCompleted = teamCell;
-                  }
-                }
+const getCheckedTiles = () => {
+	fetch("/teams-tiles")
+		.then(response => {
+			return response.json() as Promise<{ tiles: any}>;
+		})
+		.then((tiles: any) => {
+			let i = 0;
+			Object.entries(tiles).forEach((name: any, value: any) => {
+				console.log(name + " " + value);
+
+				if (reactiveBingo[i]) {
+                	const bingoTile = reactiveBingo.find(x => x.itemName.toLowerCase() == "SARA".toLowerCase());
+                	if (bingoTile) {
+                  		bingoTile.complete = true;
+                	}
               }
-            })
-          }
-      ))
-}
 
-//
-if (passcode) {
+              i++;
 
-  fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vRaxpQIerRi5oUwZkzHmhZCdx8lxpq9d4HL-H38UDj0G6pYgVYJhWrKBECZWjQ61ijlwvry11ZiUbuX/pub?gid=32278501&single=true&output=csv")
-      .then(x => x.text().then(
-          gsheet => {
-            const parsedSheet = Papa.parse(gsheet, {header: true}) as LooseObject;
-            const teamName = parsedSheet.data.find((x: {
-              [x: string]: string | string[];
-            }) => x['Passcode'] === passcode);
-            if (teamName) {
-              state.teamName = teamName.Team
-              getCheckedTiles(teamName.Team);
-            }
-          }
-      ))
+			});
+		});
+};
 
-
-}
+getCheckedTiles();
 
 const start = new Date("2024-02-16T18:00:00Z")
 const end = new Date("2024-02-26T00:00:00Z")
