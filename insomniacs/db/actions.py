@@ -125,4 +125,5 @@ def get_tiles(team):
     logger.debug("Running get_tiles with input:\n\t%s", cursor.statement)
     results = dict(zip(cursor.column_names, cursor.fetchone()))
     cursor.close()
+    results.pop("TeamName")  # Removes extraneous key
     return results

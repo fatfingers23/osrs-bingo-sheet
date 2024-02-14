@@ -23,6 +23,7 @@ EXPOSE 5000
 # Copy over backenc files
 COPY insomniacs /app/insomniacs
 COPY bingo_app.ini /etc/bingo_app.ini
+COPY frontend/src/bingoSheet.json /etc/bingoSheet.json
 
 # Copy over webpage and move everything to be hosted from /srv
 COPY --from=frontend /frontend-app/dist /srv

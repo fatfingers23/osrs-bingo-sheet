@@ -15,7 +15,11 @@ let picIndex = 0;
 reactiveBingo.forEach(x => {
   x.picName = picIndex.toString();
   picIndex++;
-})
+});
+
+reactiveBingo.forEach(x => {
+  x.tileName = x.tileName.replace(/[\/']/g, "").replace(/ /g, "_").toUpperCase();
+});
 
 
 const state = reactive({
@@ -77,12 +81,11 @@ const getCheckedTiles = () => {
 		})
 		.then((tiles: any) => {
 			let i = 0;
-			console.log(JSON.stringify(tiles));
 			Object.entries(tiles).forEach(tile => {
 				const [name, value] = tile;
 
 				if (reactiveBingo[i] && name !== "TeamName") {
-                	const bingoTile = reactiveBingo.find(x => x.tileName.toLowerCase() === name.toLowerCase());
+                	const bingoTile = reactiveBingo.find(x => x.tileName === name);
                 	if (bingoTile) {
                   		bingoTile.complete = true;
                 	}
@@ -141,7 +144,7 @@ const end = new Date("2024-02-26T00:00:00Z")
       <div v-for="(item, index) in filterList" :key="index">
 
         <div v-if="item.complete" class="bingo-tile done" v-on:click="openModal(item)">
-          <div class="tile-text line-through pt-4">{{ item.tileName }}</div>
+          <div class="tile-text line-through pt-4">{{ item.itemName }}</div>
         </div>
 
         <div v-else class="bingo-tile text-center" v-on:click="openModal(item)">
