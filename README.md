@@ -44,3 +44,9 @@ npm run build
 ```sh
 npm run lint
 ```
+
+## Deploying via Docker
+```sh
+docker compose up
+```
+Visit http://localhost:5000/index.html by default to see the page

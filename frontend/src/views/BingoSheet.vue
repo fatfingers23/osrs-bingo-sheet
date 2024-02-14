@@ -9,14 +9,27 @@ interface LooseObject {
   [key: string]: any
 }
 
+const checkMarkImage = "check-mark-icon-png.webp";
+
 const reactiveBingo = reactive(bingoSheet);
 
 let picIndex = 0;
 reactiveBingo.forEach(x => {
   x.picName = picIndex.toString();
   picIndex++;
-})
+});
 
+reactiveBingo.forEach(x => {
+  x.tileName = x.tileName.replace(/[\/']/g, "").replace(/ /g, "_").toUpperCase();
+});
+
+reactiveBingo.forEach(x => {
+  x.numberDropsRequired = 1;
+});
+
+reactiveBingo.forEach(x => {
+  x.portionCompleted = "0";
+});
 
 const state = reactive({
   modal: false,
@@ -69,49 +82,39 @@ const filterList = computed(() => {
 const route = useRoute()
 const passcode = route.params.passcode;
 
-const getCheckedTiles = (teamName: string) => {
-  fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vRaxpQIerRi5oUwZkzHmhZCdx8lxpq9d4HL-H38UDj0G6pYgVYJhWrKBECZWjQ61ijlwvry11ZiUbuX/pub?gid=0&single=true&output=csv")
-      .then(x => x.text().then(
-          gsheet => {
-            const parsedSheet = Papa.parse(gsheet, {header: true});
 
-            parsedSheet.data.forEach((row, index) => {
-              const gSheetRow = row as LooseObject;
-              const teamCell = gSheetRow[teamName];
-              if (reactiveBingo[index]) {
-                const completed = teamCell == 1
-                const bingoTile = reactiveBingo.find(x => x.itemName.toLowerCase() == gSheetRow.Item.toLowerCase());
-                if (bingoTile) {
-                  bingoTile.complete = completed;
-                  if (!completed && teamCell != '') {
-                    bingoTile.portionCompleted = teamCell;
-                  }
-                }
+const getCheckedTiles = () => {
+	fetch("/teams-tiles")
+		.then(response => {
+			return response.json() as Promise<{ tiles: any}>;
+		})
+		.then((tiles: any) => {
+			let i = 0;
+			Object.entries(tiles).forEach(tile => {
+				let name: string;
+				let value: number;
+				// @ts-ignore
+				[name, value] = tile;
+
+				if (reactiveBingo[i] && name !== "TeamName") {
+                	const bingoTile = reactiveBingo.find(x => x.tileName === name);
+                	if (bingoTile) {
+						// @ts-ignore
+                		if (value >= parseInt(bingoTile.numberDropsRequired)) {
+                			bingoTile.complete = true;
+                		} else {
+                  			bingoTile.portionCompleted = value.toString();
+						}
+                	}
               }
-            })
-          }
-      ))
-}
 
-//
-if (passcode) {
+              i++;
 
-  fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vRaxpQIerRi5oUwZkzHmhZCdx8lxpq9d4HL-H38UDj0G6pYgVYJhWrKBECZWjQ61ijlwvry11ZiUbuX/pub?gid=32278501&single=true&output=csv")
-      .then(x => x.text().then(
-          gsheet => {
-            const parsedSheet = Papa.parse(gsheet, {header: true}) as LooseObject;
-            const teamName = parsedSheet.data.find((x: {
-              [x: string]: string | string[];
-            }) => x['Passcode'] === passcode);
-            if (teamName) {
-              state.teamName = teamName.Team
-              getCheckedTiles(teamName.Team);
-            }
-          }
-      ))
+			});
+		});
+};
 
-
-}
+getCheckedTiles();
 
 const start = new Date("2024-02-16T18:00:00Z")
 const end = new Date("2024-02-26T00:00:00Z")
@@ -158,7 +161,8 @@ const end = new Date("2024-02-26T00:00:00Z")
       <div v-for="(item, index) in filterList" :key="index">
 
         <div v-if="item.complete" class="bingo-tile done" v-on:click="openModal(item)">
-          <div class="tile-text line-through pt-4">{{ item.tileName }}</div>
+          <img :src="`${checkMarkImage}`" class="check-mark">
+          <img :src="`./tiles/${item.picName}.png`" class="tile-image">
         </div>
 
         <div v-else class="bingo-tile text-center" v-on:click="openModal(item)">
@@ -246,15 +250,37 @@ const end = new Date("2024-02-26T00:00:00Z")
 }
 
 .done {
-  width: 101px;
-  height: 87.5px;
-  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L0 100 ' stroke='black' stroke-width='1'/><path d='M0 0 L100 100 ' stroke='black' stroke-width='1'/></svg>");
-  background-repeat: no-repeat;
-  background-position: center center;
+  width: 100%;
+  height: auto;
+  position: relative;
+  top: 0;
+  left: 0;
+  //background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L0 100 ' stroke='black' stroke-width='1'/><path d='M0 0 L100 100 ' stroke='black' stroke-width='1'/></svg>");
+  //background-repeat: no-repeat;
+  //background-position: center center;
 //background-size: 100% 100%, auto; z-index: 1000000; position: relative; //color: red; cursor: pointer;
+}
+
+.done .tile-image {
+  position: relative;
+  "-webkit-filter": grayscale(1);
+  filter: grayscale(1);
+  z-index: 1;
+  max-width: 100%;
+}
+
+.done .check-mark {
+  position: absolute;
+  z-index: 3;
+  max-width: 50%;
+  max-height: 50%
 }
 
 .bingo-tile {
   cursor: pointer;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 </style>
