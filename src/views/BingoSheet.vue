@@ -162,7 +162,7 @@ const end = new Date("2024-02-26T00:00:00Z")
         </div>
 
         <div v-else class="bingo-tile text-center" v-on:click="openModal(item)">
-          <img :src="`./tiles/${item.picName}.png`">
+          <img :src="`./tiles/${item.picName}.png?forcedupdate=1`">
           <span v-if="item.portionCompleted !== '0'" class="tile-text ">{{ item.portionCompleted }}</span>
         </div>
       </div>
@@ -185,7 +185,7 @@ const end = new Date("2024-02-26T00:00:00Z")
               <h3 class="font-bold text-lg">{{ state.tile.tileName }}</h3>
               <p class="py-4">{{ state.tile.description }}</p>
               <div class="flex justify-center text-center">
-                <img :src="`./tiles/${state.tile.picName}.png`" alt="bingo tile">
+                <img :src="`./tiles/${state.tile.picName}.png?forcedUpdate=1`" alt="bingo tile">
 
               </div>
               <div v-show="state.tile.portionCompleted" class="text-center">
