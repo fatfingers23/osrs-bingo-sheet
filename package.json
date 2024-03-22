@@ -13,7 +13,7 @@
   "dependencies": {
     "convert-csv-to-json": "^2.0.0",
     "csv-string": "^4.1.1",
-    "daisyui": "^2.51.6",
+    "daisyui": "^4.7.3",
     "papaparse": "^5.4.1",
     "pinia": "^2.0.32",
     "vue": "^3.2.47",

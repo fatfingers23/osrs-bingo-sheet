@@ -1,6 +1,5 @@
 <script setup lang="ts" xmlns:x-transition="http://www.w3.org/1999/xhtml">
 import {reactive, computed, onMounted, ref} from 'vue'
-import bingoSheet from '../bingoSheet.json'
 // eslint-disable-next-line no-undef
 import Papa from 'papaparse'
 import {useRoute} from 'vue-router'
@@ -20,13 +19,6 @@ type BingoTile = {
 
 const reactiveBingo = ref([] as BingoTile[]);
 const reactiveGSheet = ref([] as LooseObject[]);
-
-let picIndex = 0;
-reactiveBingo.value.forEach(x => {
-  x.picName = picIndex.toString();
-  picIndex++;
-})
-
 
 const state = reactive({
   modal: false,
@@ -91,8 +83,6 @@ const getTeamPasscodes = async () => {
   }
 }
 
-
-
 onMounted(async () => {
   const getCheckedTilesRequest =
       await fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTYBmQ7Vwo4ttP6MIJXlvowR968cxulaVIG9jSo9174BlEckmEs0nlVAMi1Mlg5L8jvCc7MrR3ScaKa/pub?gid=0&single=true&output=csv")
@@ -103,6 +93,7 @@ onMounted(async () => {
     await getTeamPasscodes();
   }
 
+  let picIndex = 0;
   reactiveBingo.value = reactiveGSheet.value.map(row => {
     let completed = false;
     let partial = '';
@@ -113,19 +104,18 @@ onMounted(async () => {
         partial = tileCompletion;
       }
     }
+    const picName = picIndex.toString();
+    picIndex++;
     return {
       tileName: row.Item,
       description: row.Description,
-      picName: row.PicName,
+      picName: picName,
       complete: completed,
       portionCompleted: partial,
     } as unknown as BingoTile;
   }) as BingoTile[]
 })
 
-
-
-//
 
 const start = new Date("2024-02-16T18:00:00Z")
 const end = new Date("2024-02-26T00:00:00Z")
@@ -137,7 +127,7 @@ const end = new Date("2024-02-26T00:00:00Z")
   <div class="p-3">
 
     <div class="text-center mt-10">
-      <h1 class="text-3xl">Insomniacs vs Hurt B-I-N-G-O</h1>
+      <h1 class="text-3xl">Insomniacs B-I-N-G-O</h1>
       <span class="text-1xl font-bold">{{ start.toLocaleString() }} till {{ end.toLocaleString() }}</span>
     </div>
     <div class="text-center mt-3 mb-2">
@@ -171,12 +161,12 @@ const end = new Date("2024-02-26T00:00:00Z")
     <div class="md:p-10 p-5 grid gap-2 md:gap-4 grid-cols-4 grid-rows-2 md:grid-cols-8 md:grid-rows-4">
       <div v-for="(item, index) in filterList" :key="index">
 
-        <div v-if="item.complete" class="bingo-tile done" v-on:click="openModal(item)">
+        <div v-if="item.complete" class="cursor-pointer done" v-on:click="openModal(item)">
           <div class="tile-text line-through pt-4">{{ item.tileName }}</div>
         </div>
 
-        <div v-else class="bingo-tile text-center" v-on:click="openModal(item)">
-          <img :src="`./tiles/${item.picName}.png?forcedupdate=1`">
+        <div v-else class="cursor-pointer text-center" v-on:click="openModal(item)">
+          <img :src="`./tiles/${item.picName}.png?forcedupdate=1`" class="object-contain max-w-full rounded-lg ">
           <span v-if="item.portionCompleted !== '0'" class="tile-text ">{{ item.portionCompleted }}</span>
         </div>
       </div>
@@ -185,35 +175,27 @@ const end = new Date("2024-02-26T00:00:00Z")
     </div>
 
     <!-- The Modal -->
-    <Transition name="fade">
 
-      <div
-          class="fixed inset-0 w-full h-full z-20 bg-black bg-opacity-50 duration-300 overflow-y-auto"
-          v-show="state.modal"
-
-      >
-        <div v-show="state.modal"
-             class="relative lg:w-1/2 mx-2 sm:mx-auto my-10 opacity-100">
-          <div class="modal-show" id="my-modal-2">
-            <div class="modal-box">
-              <h3 class="font-bold text-lg">{{ state.tile.tileName }}</h3>
-              <p class="py-4">{{ state.tile.description }}</p>
-              <div class="flex justify-center text-center">
-                <img :src="`./tiles/${state.tile.picName}.png?forcedUpdate=1`" alt="bingo tile">
-
-              </div>
-              <div v-show="state.tile.portionCompleted" class="text-center">
-                <p v-if="state.tile.portionCompleted !== '0'">{{ state.tile.portionCompleted }}</p>
-              </div>
-              <div class="modal-action">
-                <button v-on:click="closeModal" class="btn">close</button>
-              </div>
-            </div>
-          </div>
+    <dialog id="tile details" :class="{'modal  modal-bottom sm:modal-middle': true, 'modal-open': state.modal}">
+      <div class="modal-box">
+        <h3 class="font-bold text-lg">{{ state.tile.tileName }}</h3>
+                      <p class="py-4">{{ state.tile.description }}</p>
+        <div class="flex justify-center text-center">
+          <img :src="`./tiles/${state.tile.picName}.png?forcedUpdate=1`" alt="bingo tile">
 
         </div>
+        <div v-show="state.tile.portionCompleted" class="text-center">
+          <p v-if="state.tile.portionCompleted !== '0'">{{ state.tile.portionCompleted }}</p>
+        </div>
+        <div class="modal-action">
+          <form method="dialog">
+            <!-- if there is a button in form, it will close the modal -->
+            <button class="btn" @click="() => closeModal()">Close</button>
+          </form>
+        </div>
       </div>
-    </Transition>
+    </dialog>
+
 
 
   </div>
@@ -221,43 +203,6 @@ const end = new Date("2024-02-26T00:00:00Z")
 </template>
 
 <style scoped>
-/* The Modal (background) */
-.modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1; /* Sit on top */
-  left: 0;
-  top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgb(0, 0, 0); /* Fallback color */
-  background-color: rgba(0, 0, 0, 0.4); /* Black w/ opacity */
-}
-
-/* Modal Content/Box */
-.modal-content {
-  background-color: #fefefe;
-  margin: 15% auto; /* 15% from the top and centered */
-  padding: 20px;
-  border: 1px solid #888;
-  width: 80%; /* Could be more or less, depending on screen size */
-}
-
-/* The Close Button */
-.close {
-  color: #aaa;
-  float: right;
-  font-size: 28px;
-  font-weight: bold;
-}
-
-.close:hover,
-.close:focus {
-  color: black;
-  text-decoration: none;
-  cursor: pointer;
-}
 
 .done {
   width: 101px;
@@ -265,7 +210,6 @@ const end = new Date("2024-02-26T00:00:00Z")
   background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L0 100 ' stroke='black' stroke-width='1'/><path d='M0 0 L100 100 ' stroke='black' stroke-width='1'/></svg>");
   background-repeat: no-repeat;
   background-position: center center;
-  //background-size: 100% 100%, auto; z-index: 1000000; position: relative; //color: red; cursor: pointer;
 }
 
 .bingo-tile {
