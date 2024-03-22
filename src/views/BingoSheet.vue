@@ -89,7 +89,7 @@ onMounted(async () => {
   const getaCheckedTiles = await getCheckedTilesRequest.text()
   reactiveGSheet.value = Papa.parse(getaCheckedTiles, {header: true}).data as LooseObject[];
 
-  if(passcode){
+  if (passcode) {
     await getTeamPasscodes();
   }
 
@@ -97,7 +97,7 @@ onMounted(async () => {
   reactiveBingo.value = reactiveGSheet.value.map(row => {
     let completed = false;
     let partial = '';
-    if(passcode){
+    if (passcode) {
       const tileCompletion = row[state.teamName];
       completed = tileCompletion == 1;
       if (!completed && tileCompletion != '') {
@@ -158,28 +158,34 @@ const end = new Date("2024-02-26T00:00:00Z")
         </div>
       </div>
     </div>
-    <div class="md:p-10 p-5 grid gap-2 md:gap-4 grid-cols-4 grid-rows-2 md:grid-cols-8 md:grid-rows-4">
-      <div v-for="(item, index) in filterList" :key="index">
+    <transition name="fade">
+      <div v-if="filterList.length > 0"
+           class="md:p-10 p-5 grid gap-2 md:gap-4 grid-cols-4 grid-rows-2 md:grid-cols-8 md:grid-rows-4">
+        <div v-for="(item, index) in filterList" :key="index">
+          <div v-if="item.complete" class="cursor-pointer done" v-on:click="openModal(item)">
+            <div class="tile-text line-through pt-4">{{ item.tileName }}</div>
+          </div>
 
-        <div v-if="item.complete" class="cursor-pointer done" v-on:click="openModal(item)">
-          <div class="tile-text line-through pt-4">{{ item.tileName }}</div>
-        </div>
-
-        <div v-else class="cursor-pointer text-center" v-on:click="openModal(item)">
-          <img :src="`./tiles/${item.picName}.png?forcedupdate=1`" class="object-contain max-w-full rounded-lg ">
-          <span v-if="item.portionCompleted !== '0'" class="tile-text ">{{ item.portionCompleted }}</span>
+          <div v-else class="cursor-pointer text-center" v-on:click="openModal(item)">
+            <img :src="`./tiles/${item.picName}.png?forcedupdate=1`" class="object-contain max-w-full rounded-lg ">
+            <span v-if="item.portionCompleted !== '0'" class="tile-text ">{{ item.portionCompleted }}</span>
+          </div>
         </div>
       </div>
 
-
-    </div>
+      <div v-else class="text-center mt-10">
+        <span>Loading the mother of all bingo sheets</span>
+        <br>
+        <span class="loading loading-spinner loading-lg"></span>
+      </div>
+    </transition>
 
     <!-- The Modal -->
 
     <dialog id="tile details" :class="{'modal  modal-bottom sm:modal-middle': true, 'modal-open': state.modal}">
       <div class="modal-box">
         <h3 class="font-bold text-lg">{{ state.tile.tileName }}</h3>
-                      <p class="py-4">{{ state.tile.description }}</p>
+        <p class="py-4">{{ state.tile.description }}</p>
         <div class="flex justify-center text-center">
           <img :src="`./tiles/${state.tile.picName}.png?forcedUpdate=1`" alt="bingo tile">
 
@@ -189,13 +195,11 @@ const end = new Date("2024-02-26T00:00:00Z")
         </div>
         <div class="modal-action">
           <form method="dialog">
-            <!-- if there is a button in form, it will close the modal -->
             <button class="btn" @click="() => closeModal()">Close</button>
           </form>
         </div>
       </div>
     </dialog>
-
 
 
   </div>
