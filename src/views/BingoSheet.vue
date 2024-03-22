@@ -1,5 +1,5 @@
 <script setup lang="ts" xmlns:x-transition="http://www.w3.org/1999/xhtml">
-import {reactive, computed} from 'vue'
+import {reactive, computed, onMounted, ref} from 'vue'
 import bingoSheet from '../bingoSheet.json'
 // eslint-disable-next-line no-undef
 import Papa from 'papaparse'
@@ -9,10 +9,20 @@ interface LooseObject {
   [key: string]: any
 }
 
-const reactiveBingo = reactive(bingoSheet);
+type BingoTile = {
+  tileName: string,
+  description: string,
+  picName: string,
+  complete: boolean,
+  portionCompleted: string
+}
+
+
+const reactiveBingo = ref([] as BingoTile[]);
+const reactiveGSheet = ref([] as LooseObject[]);
 
 let picIndex = 0;
-reactiveBingo.forEach(x => {
+reactiveBingo.value.forEach(x => {
   x.picName = picIndex.toString();
   picIndex++;
 })
@@ -29,7 +39,7 @@ const state = reactive({
   search: '',
   teamName: '',
   totalComplete: computed(() => {
-    return reactiveBingo.filter(x => x.complete).length
+    return reactiveBingo.value.filter(x => x.complete).length
   })
 });
 
@@ -60,58 +70,62 @@ function closeModal(): void {
 
 const filterList = computed(() => {
   if (state.search === '') {
-    return reactiveBingo
+    return reactiveBingo.value
   } else {
-    return reactiveBingo.filter(tile => tile.tileName.toLowerCase().includes(state.search.toLowerCase()))
+    return reactiveBingo.value.filter(tile => tile.tileName.toLowerCase().includes(state.search.toLowerCase()))
   }
 })
 
 const route = useRoute()
 const passcode = route.params.passcode;
 
-const getCheckedTiles = (teamName: string) => {
-  fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vRaxpQIerRi5oUwZkzHmhZCdx8lxpq9d4HL-H38UDj0G6pYgVYJhWrKBECZWjQ61ijlwvry11ZiUbuX/pub?gid=0&single=true&output=csv")
-      .then(x => x.text().then(
-          gsheet => {
-            const parsedSheet = Papa.parse(gsheet, {header: true});
-
-            parsedSheet.data.forEach((row, index) => {
-              const gSheetRow = row as LooseObject;
-              const teamCell = gSheetRow[teamName];
-              if (reactiveBingo[index]) {
-                const completed = teamCell == 1
-                const bingoTile = reactiveBingo.find(x => x.itemName.toLowerCase() == gSheetRow.Item.toLowerCase());
-                if (bingoTile) {
-                  bingoTile.complete = completed;
-                  if (!completed && teamCell != '') {
-                    bingoTile.portionCompleted = teamCell;
-                  }
-                }
-              }
-            })
-          }
-      ))
+const getTeamPasscodes = async () => {
+  const pastCodeRequest = await fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTYBmQ7Vwo4ttP6MIJXlvowR968cxulaVIG9jSo9174BlEckmEs0nlVAMi1Mlg5L8jvCc7MrR3ScaKa/pub?gid=32278501&single=true&output=csv");
+  const pasCode = await pastCodeRequest.text();
+  const parsedSheet = Papa.parse(pasCode, {header: true}) as LooseObject;
+  const teamName = parsedSheet.data.find((x: {
+    [x: string]: string | string[];
+  }) => x['Passcode'] === passcode);
+  if (teamName) {
+    state.teamName = teamName.Team
+  }
 }
+
+
+
+onMounted(async () => {
+  const getCheckedTilesRequest =
+      await fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTYBmQ7Vwo4ttP6MIJXlvowR968cxulaVIG9jSo9174BlEckmEs0nlVAMi1Mlg5L8jvCc7MrR3ScaKa/pub?gid=0&single=true&output=csv")
+  const getaCheckedTiles = await getCheckedTilesRequest.text()
+  reactiveGSheet.value = Papa.parse(getaCheckedTiles, {header: true}).data as LooseObject[];
+
+  if(passcode){
+    await getTeamPasscodes();
+  }
+
+  reactiveBingo.value = reactiveGSheet.value.map(row => {
+    let completed = false;
+    let partial = '';
+    if(passcode){
+      const tileCompletion = row[state.teamName];
+      completed = tileCompletion == 1;
+      if (!completed && tileCompletion != '') {
+        partial = tileCompletion;
+      }
+    }
+    return {
+      tileName: row.Item,
+      description: row.Description,
+      picName: row.PicName,
+      complete: completed,
+      portionCompleted: partial,
+    } as unknown as BingoTile;
+  }) as BingoTile[]
+})
+
+
 
 //
-if (passcode) {
-
-  fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vRaxpQIerRi5oUwZkzHmhZCdx8lxpq9d4HL-H38UDj0G6pYgVYJhWrKBECZWjQ61ijlwvry11ZiUbuX/pub?gid=32278501&single=true&output=csv")
-      .then(x => x.text().then(
-          gsheet => {
-            const parsedSheet = Papa.parse(gsheet, {header: true}) as LooseObject;
-            const teamName = parsedSheet.data.find((x: {
-              [x: string]: string | string[];
-            }) => x['Passcode'] === passcode);
-            if (teamName) {
-              state.teamName = teamName.Team
-              getCheckedTiles(teamName.Team);
-            }
-          }
-      ))
-
-
-}
 
 const start = new Date("2024-02-16T18:00:00Z")
 const end = new Date("2024-02-26T00:00:00Z")
@@ -124,26 +138,26 @@ const end = new Date("2024-02-26T00:00:00Z")
 
     <div class="text-center mt-10">
       <h1 class="text-3xl">Insomniacs vs Hurt B-I-N-G-O</h1>
-      <span class="text-1xl font-bold">{{start.toLocaleString()}} till {{end.toLocaleString()}}</span>
+      <span class="text-1xl font-bold">{{ start.toLocaleString() }} till {{ end.toLocaleString() }}</span>
     </div>
     <div class="text-center mt-3 mb-2">
-      <h1 class="text-3xl" v-show="state.teamName != ''">Team: {{ state.teamName}}</h1>
+      <h1 class="text-3xl" v-show="state.teamName != ''">Team: {{ state.teamName }}</h1>
       <h1 class="text-3xl" v-show="state.totalComplete !== 0">Total Tiles Completed: {{ state.totalComplete }}</h1>
     </div>
 
-<!--    <div class="text-center mt-3">-->
-<!--      <h3 class="text-2xl">Extra Info</h3>-->
-<!--    </div>-->
-<!--    <div class="p-6 md:p-10">-->
-<!--      <p class="">-->
+    <!--    <div class="text-center mt-3">-->
+    <!--      <h3 class="text-2xl">Extra Info</h3>-->
+    <!--    </div>-->
+    <!--    <div class="p-6 md:p-10">-->
+    <!--      <p class="">-->
 
-<!--Do we want anything here?-->
-<!--      </p>-->
+    <!--Do we want anything here?-->
+    <!--      </p>-->
 
-<!--      <p>-->
+    <!--      <p>-->
 
-<!--      </p>-->
-<!--    </div>-->
+    <!--      </p>-->
+    <!--    </div>-->
     <div class="flex justify-center">
       <div class="form-control ">
         <div class="input-group ">
@@ -251,7 +265,7 @@ const end = new Date("2024-02-26T00:00:00Z")
   background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L0 100 ' stroke='black' stroke-width='1'/><path d='M0 0 L100 100 ' stroke='black' stroke-width='1'/></svg>");
   background-repeat: no-repeat;
   background-position: center center;
-//background-size: 100% 100%, auto; z-index: 1000000; position: relative; //color: red; cursor: pointer;
+  //background-size: 100% 100%, auto; z-index: 1000000; position: relative; //color: red; cursor: pointer;
 }
 
 .bingo-tile {
