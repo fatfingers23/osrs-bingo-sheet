@@ -139,10 +139,10 @@ const countDown = reactive({
 const showRemaining = () => {
   let now = new Date();
   let endTimeToUse: Date;
-  if (now > start){
+  if (now > start) {
     countDown.bingoIsGoing = true;
     endTimeToUse = end;
-  }else{
+  } else {
     endTimeToUse = start;
   }
   // @ts-ignore
@@ -214,9 +214,15 @@ timer = setInterval(showRemaining, 1000);
         </div>
       </div>
     </div>
+    <div v-if="filterList.length == 0 && reactiveBingo.length !== 0" class="flex justify-center pt-2">
+      <img class="object-contain max-w-full rounded-lg " alt="no search results"
+           src="https://upload.wikimedia.org/wikipedia/en/8/8d/Super_Mario_Bros_Princess_Is_In_Another_Castle_Quote.png"/>
+    </div>
     <transition name="fade">
-      <div v-if="filterList.length > 0"
+
+      <div v-if="reactiveBingo.length > 0"
            class="md:p-10 p-5 grid gap-2 md:gap-4 grid-cols-4 grid-rows-2 md:grid-cols-8 md:grid-rows-4">
+
         <div v-for="(item, index) in filterList" :key="index">
           <div v-if="item.complete" class="cursor-pointer done" v-on:click="openModal(item)">
             <div class="tile-text line-through pt-4">{{ item.tileName }}</div>
@@ -228,7 +234,6 @@ timer = setInterval(showRemaining, 1000);
           </div>
         </div>
       </div>
-
       <div v-else class="text-center mt-10">
         <span>Loading the mother of all bingo sheets</span>
         <br>
@@ -238,7 +243,7 @@ timer = setInterval(showRemaining, 1000);
 
     <!-- The Modal -->
 
-    <dialog id="tile details" :class="{'modal modal-bottom sm:modal-middle': true, 'modal-open': state.modal}">
+    <dialog id="tile details" :class="{'modal sm:modal-middle': true, 'modal-open': state.modal}">
       <div class="modal-box">
         <h3 class="font-bold text-lg">{{ state.tile.tileName }}</h3>
         <p class="py-4">{{ state.tile.description }}</p>
