@@ -182,12 +182,12 @@ const end = new Date("2024-02-26T00:00:00Z")
 
     <!-- The Modal -->
 
-    <dialog id="tile details" :class="{'modal  modal-bottom sm:modal-middle': true, 'modal-open': state.modal}">
+    <dialog id="tile details" :class="{'modal modal-bottom sm:modal-middle': true, 'modal-open': state.modal}">
       <div class="modal-box">
         <h3 class="font-bold text-lg">{{ state.tile.tileName }}</h3>
         <p class="py-4">{{ state.tile.description }}</p>
         <div class="flex justify-center text-center">
-          <img :src="`./tiles/${state.tile.picName}.png?forcedUpdate=1`" alt="bingo tile">
+          <img :src="`./tiles/${state.tile.picName}.png?forcedUpdate=2`" alt="bingo tile">
 
         </div>
         <div v-show="state.tile.portionCompleted" class="text-center">
@@ -210,13 +210,8 @@ const end = new Date("2024-02-26T00:00:00Z")
 
 .done {
   width: 101px;
-  height: 87.5px;
-  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L0 100 ' stroke='black' stroke-width='1'/><path d='M0 0 L100 100 ' stroke='black' stroke-width='1'/></svg>");
-  background-repeat: no-repeat;
-  background-position: center center;
+  height: 88px;
+  background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L0 100 ' stroke='black' stroke-width='1'/><path d='M0 0 L100 100 ' stroke='black' stroke-width='1'/></svg>") no-repeat center center;
 }
 
-.bingo-tile {
-  cursor: pointer;
-}
 </style>
