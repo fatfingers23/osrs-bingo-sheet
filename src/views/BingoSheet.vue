@@ -225,12 +225,13 @@ timer = setInterval(showRemaining, 1000);
 
         <div v-for="(item, index) in filterList" :key="index">
           <div v-if="item.complete" class="cursor-pointer done" v-on:click="openModal(item)">
-            <div class="tile-text line-through pt-4">{{ item.tileName }}</div>
+            <div class="line-through pt-4">{{ item.tileName }}</div>
           </div>
 
           <div v-else class="cursor-pointer text-center" v-on:click="openModal(item)">
-            <img :src="`./tiles/${item.picName}.png?forcedupdate=2`" class="object-contain max-w-full rounded-lg ">
-            <span v-if="item.portionCompleted !== '0'" class="tile-text ">{{ item.portionCompleted }}</span>
+            <img :src="`./tiles/${item.picName}.png?forcedupdate=2`" class="object-contain max-w-full rounded-lg" :alt="`bingo tile for ${item.tileName}`">
+            <span class="text-xs">{{ item.tileName }}</span>
+            <span v-if="item.portionCompleted !== '0'" class=" ">{{ item.portionCompleted }}</span>
           </div>
         </div>
       </div>
