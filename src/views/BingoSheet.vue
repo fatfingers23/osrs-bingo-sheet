@@ -77,7 +77,7 @@ document.addEventListener('keyup', function (evt) {
     if (reactiveEasterEggs.value.screenRotation <= 0) {
       reactiveEasterEggs.value.screenRotation = 360;
     }
-  }
+}
 
 });
 
@@ -301,7 +301,8 @@ timer = setInterval(showRemaining, 1000);
     <source src="/tiles/scapeMain.mp3" type="audio/mpeg"/>
   </audio>
 
-  <div class="p-3" :style="{transform: `rotate(${reactiveEasterEggs.screenRotation}deg)`}">
+  <div class="p-3">
+    <div :style="{transform: `rotate(${reactiveEasterEggs.screenRotation}deg)`}">
     <small class="super-small">at the bottom right</small>
     <div class="text-center mt-10">
       <h1 class="text-3xl">Insomniacs B-I-N-G-O</h1>
@@ -380,6 +381,17 @@ timer = setInterval(showRemaining, 1000);
     </transition>
 
 
+    <div class="flex justify-center p-6 md:p-10">
+      <a @click="pleaseGodMakeItStop" class="text-sm underline cursor-pointer">
+        if the audio is playing and annoying you can click here to permanently stop it
+      </a>
+    </div>
+    <div class="flex justify-end">
+      <small class="super-small">You need to check under the "Cerberus Unique"</small>
+    </div>
+    <button class="hidden btn btn-outline" @click="hiddenButton">What happens if you click me?</button>
+    </div>
+    
     <!-- The Modal -->
 
     <dialog id="tile details" :class="{'modal sm:modal-middle': true, 'modal-open': state.modal}">
@@ -402,15 +414,6 @@ timer = setInterval(showRemaining, 1000);
     </dialog>
 
 
-    <div class="flex justify-center p-6 md:p-10">
-      <a @click="pleaseGodMakeItStop" class="text-sm underline cursor-pointer">
-        if the audio is playing and annoying you can click here to permanently stop it
-      </a>
-    </div>
-    <div class="flex justify-end">
-      <small class="super-small">You need to check under the "Cerberus Unique"</small>
-    </div>
-    <button class="hidden btn btn-outline" @click="hiddenButton">What happens if you click me?</button>
   </div>
 
 </template>
