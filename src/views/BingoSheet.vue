@@ -87,7 +87,9 @@ onMounted(async () => {
   const getCheckedTilesRequest =
       await fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTYBmQ7Vwo4ttP6MIJXlvowR968cxulaVIG9jSo9174BlEckmEs0nlVAMi1Mlg5L8jvCc7MrR3ScaKa/pub?gid=0&single=true&output=csv")
   const getaCheckedTiles = await getCheckedTilesRequest.text()
-  reactiveGSheet.value = Papa.parse(getaCheckedTiles, {header: true}).data as LooseObject[];
+  const sheet =  Papa.parse(getaCheckedTiles, {header: true}).data as LooseObject[];
+  // - 3 here is for the leader board that is at the end
+  reactiveGSheet.value = sheet.splice(0, sheet.length - 3)
 
   if (passcode) {
     await getTeamPasscodes();
@@ -227,6 +229,10 @@ timer = setInterval(showRemaining, 1000);
           <div v-if="item.complete" class="cursor-pointer done" v-on:click="openModal(item)">
             <div class="line-through pt-4">{{ item.tileName }}</div>
           </div>
+
+<!--          todo Add some easter eggs as double clicks for tile 69 add double click and show nice-->
+<!--          for teh big fish have it switch to that reel big fish meme-->
+<!--          Do a few search term ones, maybe never give up on you&lt;!&ndash;&ndash;&gt;-->
 
           <div v-else class="cursor-pointer text-center" v-on:click="openModal(item)">
             <img :src="`./tiles/${item.picName}.png?forcedupdate=2`" class="object-contain max-w-full rounded-lg" :alt="`bingo tile for ${item.tileName}`">
