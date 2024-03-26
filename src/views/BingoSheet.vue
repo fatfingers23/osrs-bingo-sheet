@@ -337,7 +337,7 @@ timer = setInterval(showRemaining, 1000);
             <span v-if="item.portionCompleted !== '0'" class=" ">{{ item.portionCompleted }}</span>
           </div>
           <div class="flex justify-center">
-          <small v-if="item.picName === '47'" class="super-small">Go to the search bar and enter the first leader of each message</small>
+          <small v-if="item.picName === '47'" class="super-small">Go to the search bar and enter the first word of each message in order!</small>
           </div>
         </div>
       </div>
