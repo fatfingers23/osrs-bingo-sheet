@@ -1,8 +1,11 @@
-<script setup lang="ts" xmlns:x-transition="http://www.w3.org/1999/xhtml">
+<script setup lang="ts" xmlns:x-transition="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
 import {computed, onMounted, reactive, ref, watch} from 'vue'
 // eslint-disable-next-line no-undef
 import Papa from 'papaparse'
 import {useRoute} from 'vue-router'
+import JSConfetti from 'js-confetti'
+
+const confetti = new JSConfetti();
 
 interface LooseObject {
   [key: string]: any
@@ -19,12 +22,22 @@ type BingoTile = {
 type EasterEggs = {
   reelBigFish: boolean,
   nice: boolean,
-  btw: boolean
+  btw: boolean,
+  //new ones
+  pause: boolean,
+  aRealEgg: boolean
 }
 
 const reactiveBingo = ref([] as BingoTile[]);
 const reactiveGSheet = ref([] as LooseObject[]);
-let reactiveEasterEggs = ref({reelBigFish: false, neverGiveUp: false, nice:false, btw: false} as EasterEggs);
+let reactiveEasterEggs = ref({
+  reelBigFish: false,
+  neverGiveUp: false,
+  nice:false,
+  btw: false,
+  pause: false,
+  aRealEgg: false
+} as EasterEggs);
 
 const state = reactive({
   modal: false,
@@ -38,7 +51,9 @@ const state = reactive({
   teamName: '',
   totalComplete: computed(() => {
     return reactiveBingo.value.filter(x => x.complete).length
-  })
+  }),
+  playing: false,
+  pauseWasClicked: false
 });
 
 
@@ -93,6 +108,11 @@ watch(state, async () => {
   }else {
     reactiveEasterEggs.value.btw = false;
   }
+
+  if(state.search.toLowerCase() === 'look at you go') {
+    await confetti.addConfetti();
+  }
+
 });
 
 const route = useRoute()
@@ -110,7 +130,49 @@ const getTeamPasscodes = async () => {
   }
 }
 
+let audioElement: HTMLAudioElement;
+
+const stopMusic = () => {
+  document.querySelector("audio").pause();
+  state.playing = false
+  state.pauseWasClicked = true;
+  audioElement.removeEventListener("pointerup", playMusic);
+}
+
+const pleaseGodMakeItStop = () => {
+  stopMusic()
+  localStorage.setItem('stopMusic', 'true');
+}
+
+const playMusic = () => {
+  // User interacted with the page. Let's play audio!
+  if (!state.pauseWasClicked) {
+
+
+    audioElement
+        .play()
+        .then(() => {
+          state.playing = true
+          console.log("Audio is playing");
+        })
+        .catch((error) => {
+          console.error(error);
+        });
+  }
+};
+
 onMounted(async () => {
+
+  const localStorageStopMusic = localStorage.getItem('stopMusic');
+
+  if (!localStorageStopMusic) {
+    //@ts-ignore
+    audioElement = document.querySelector("audio");
+    let searchBar = document.getElementById("search");
+    //@ts-ignore
+    searchBar.addEventListener("pointerup", playMusic);
+  }
+
   const getCheckedTilesRequest =
       await fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTYBmQ7Vwo4ttP6MIJXlvowR968cxulaVIG9jSo9174BlEckmEs0nlVAMi1Mlg5L8jvCc7MrR3ScaKa/pub?gid=0&single=true&output=csv")
   const getaCheckedTiles = await getCheckedTilesRequest.text()
@@ -188,15 +250,20 @@ const showRemaining = () => {
 
 timer = setInterval(showRemaining, 1000);
 
+
 </script>
 
 <template>
-
+  <audio>
+    <source src="/tiles/scapeMain.mp3" type="audio/mpeg"/>
+  </audio>
 
   <div class="p-3">
-
+    <small class="super-small">at the bottom right</small>
     <div class="text-center mt-10">
       <h1 class="text-3xl">Insomniacs B-I-N-G-O</h1>
+      <small class="super-small">look at the top left</small>
+      <br>
       <span class="text-1xl font-bold">{{ start.toLocaleString() }} till {{ end.toLocaleString() }}</span>
     </div>
     <div class="flex justify-center">
@@ -218,11 +285,9 @@ timer = setInterval(showRemaining, 1000);
       <h1 class="text-3xl" v-show="state.totalComplete !== 0">Total Tiles Completed: {{ state.totalComplete }}</h1>
     </div>
 
-    <!--    <div class="text-center mt-3">-->
+<!--        <div class="text-center mt-3">-->
     <!--      <h3 class="text-2xl">Extra Info</h3>-->
     <!--    </div>-->
-    <!--    <div class="p-6 md:p-10">-->
-    <!--      <p class="">-->
 
     <!--Do we want anything here?-->
     <!--      </p>-->
@@ -234,12 +299,18 @@ timer = setInterval(showRemaining, 1000);
     <div class="flex justify-center">
       <div class="form-control">
         <div class="input-group ">
-          <input type="text" placeholder="Search…" class="input input-bordered " v-model="state.search"/>
-          <button class="btn btn-square" v-on:click="state.search = ''">
+          <input id="search" type="text" placeholder="Search…" class="input input-bordered " v-model="state.search"/>
+          <button class="btn btn-square" v-on:click="state.search = ''" >
             X
           </button>
         </div>
       </div>
+
+    </div>
+    <div v-if="state.playing" class="flex justify-center pt-3">
+      <button class="btn btn-circle  bg-amber-50 w-12 rounded" @click="stopMusic">
+        <svg height="48" viewBox="0 0 48 48" width="48" xmlns="http://www.w3.org/2000/svg"><path d="M0 0h48v48H0z" fill="none"/><path d="M18 32h4V16h-4v16zm6-28C12.95 4 4 12.95 4 24s8.95 20 20 20 20-8.95 20-20S35.05 4 24 4zm0 36c-8.82 0-16-7.18-16-16S15.18 8 24 8s16 7.18 16 16-7.18 16-16 16zm2-8h4V16h-4v16z"/></svg>
+      </button>
     </div>
     <div v-if="filterList.length == 0 && reactiveBingo.length !== 0" class="flex justify-center pt-2">
       <img v-if="reactiveEasterEggs.btw " :src="`./tiles/btw.png`" class="object-contain max-w-full rounded-lg" alt="btw">
@@ -264,6 +335,9 @@ timer = setInterval(showRemaining, 1000);
             <br/>
             <span v-if="item.portionCompleted !== '0'" class=" ">{{ item.portionCompleted }}</span>
           </div>
+          <div class="flex justify-center">
+          <small v-if="item.picName === '47'" class="super-small">Go to the search bar and enter the first leader of each message</small>
+          </div>
         </div>
       </div>
       <div v-else class="text-center mt-10">
@@ -272,6 +346,7 @@ timer = setInterval(showRemaining, 1000);
         <span class="loading loading-spinner loading-lg"></span>
       </div>
     </transition>
+
 
     <!-- The Modal -->
 
@@ -295,11 +370,23 @@ timer = setInterval(showRemaining, 1000);
     </dialog>
 
 
+    <div class="flex justify-center p-6 md:p-10">
+      <a @click="pleaseGodMakeItStop" class="text-sm underline cursor-pointer">
+        if the audio is playing and anoying you can click here to permanently stop it
+      </a>
+    </div>
+    <div class="flex justify-end">
+      <small class="super-small">You need to check under the "Cerberus Unique"</small>
+    </div>
   </div>
 
 </template>
 
 <style scoped>
+
+.super-small {
+  font-size: 2px;
+}
 
 .done {
   width: 101px;
