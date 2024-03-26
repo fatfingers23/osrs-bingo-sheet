@@ -25,7 +25,8 @@ type EasterEggs = {
   btw: boolean,
   //new ones
   pause: boolean,
-  aRealEgg: boolean
+  aRealEgg: boolean,
+  clown: boolean
 }
 
 const reactiveBingo = ref([] as BingoTile[]);
@@ -36,7 +37,8 @@ let reactiveEasterEggs = ref({
   nice:false,
   btw: false,
   pause: false,
-  aRealEgg: false
+  aRealEgg: false,
+  clown: false
 } as EasterEggs);
 
 const state = reactive({
@@ -113,6 +115,9 @@ watch(state, async () => {
     await confetti.addConfetti();
   }
 
+  if(state.search.toLowerCase() === '🤡' || state.search.toLowerCase() === 'clown') {
+    reactiveEasterEggs.value.clown = true;
+  }
 });
 
 const route = useRoute()
@@ -331,6 +336,7 @@ timer = setInterval(showRemaining, 1000);
           <div v-else class="cursor-pointer text-center" v-on:click="openModal(item)">
             <img v-if="reactiveEasterEggs.reelBigFish && item.picName === '65'" :src="`./tiles/reel_big_fish.png`" class="object-contain max-w-full rounded-lg" alt="Reel big fish easter egg">
             <img v-else-if="reactiveEasterEggs.nice && item.picName === '69'" :src="`./tiles/nice.png`" class="object-contain max-w-full rounded-lg" alt="tile 69 nice">
+            <img v-else-if="reactiveEasterEggs.clown" :src="`./tiles/dangler_head.png`" class="object-contain max-w-full rounded-lg" alt="clown">
             <img v-else :src="`./tiles/${item.picName}.png?forcedupdate=2`" class="object-contain max-w-full rounded-lg" :alt="`bingo tile for ${item.tileName}`">
             <span class="text-xs">{{ item.tileName }}</span>
             <br/>
