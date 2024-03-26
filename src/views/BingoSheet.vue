@@ -261,6 +261,7 @@ timer = setInterval(showRemaining, 1000);
             <img v-else-if="reactiveEasterEggs.nice && item.picName === '69'" :src="`./tiles/nice.png`" class="object-contain max-w-full rounded-lg" alt="tile 69 nice">
             <img v-else :src="`./tiles/${item.picName}.png?forcedupdate=2`" class="object-contain max-w-full rounded-lg" :alt="`bingo tile for ${item.tileName}`">
             <span class="text-xs">{{ item.tileName }}</span>
+            <br/>
             <span v-if="item.portionCompleted !== '0'" class=" ">{{ item.portionCompleted }}</span>
           </div>
         </div>
