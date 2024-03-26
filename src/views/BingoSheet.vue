@@ -1,4 +1,4 @@
-<script setup lang="ts" xmlns:x-transition="http://www.w3.org/1999/xhtml" xmlns="http://www.w3.org/1999/html">
+<script setup lang="ts">
 import {computed, onMounted, reactive, ref, watch} from 'vue'
 // eslint-disable-next-line no-undef
 import Papa from 'papaparse'
@@ -133,6 +133,7 @@ const getTeamPasscodes = async () => {
 let audioElement: HTMLAudioElement;
 
 const stopMusic = () => {
+  //@ts-ignore
   document.querySelector("audio").pause();
   state.playing = false
   state.pauseWasClicked = true;
