@@ -391,7 +391,7 @@ timer = setInterval(showRemaining, 1000);
     </div>
     <button class="hidden btn btn-outline" @click="hiddenButton">What happens if you click me?</button>
     </div>
-    
+
     <!-- The Modal -->
 
     <dialog id="tile details" :class="{'modal sm:modal-middle': true, 'modal-open': state.modal}">
