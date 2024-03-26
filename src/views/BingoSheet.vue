@@ -1,5 +1,5 @@
 <script setup lang="ts" xmlns:x-transition="http://www.w3.org/1999/xhtml">
-import {reactive, computed, onMounted, ref} from 'vue'
+import {reactive, computed, onMounted, ref, watch} from 'vue'
 // eslint-disable-next-line no-undef
 import Papa from 'papaparse'
 import {useRoute} from 'vue-router'
@@ -16,9 +16,15 @@ type BingoTile = {
   portionCompleted: string
 }
 
+type EasterEggs = {
+  reelBigFish: boolean,
+  nice: boolean,
+  btw: boolean
+}
 
 const reactiveBingo = ref([] as BingoTile[]);
 const reactiveGSheet = ref([] as LooseObject[]);
+let reactiveEasterEggs = ref({reelBigFish: false, neverGiveUp: false, nice:false, btw: false} as EasterEggs);
 
 const state = reactive({
   modal: false,
@@ -43,6 +49,14 @@ document.addEventListener('keyup', function (evt) {
 });
 
 function openModal(item: LooseObject): void {
+  if(item.picName === '65') {
+    reactiveEasterEggs.value.reelBigFish = true;
+  }
+
+  if(item.picName === '69') {
+    reactiveEasterEggs.value.nice = true;
+  }
+
   state.modal = true;
   state.tile.tileName = item.tileName;
   state.tile.description = item.description;
@@ -60,13 +74,31 @@ function closeModal(): void {
   };
 }
 
+const neverGoingToGiveYouUp = "Never going to give you up";
+
 const filterList = computed(() => {
   if (state.search === '') {
     return reactiveBingo.value
   } else {
+    if (state.search.toLowerCase() === neverGoingToGiveYouUp.toLowerCase()) {
+      window.location.href = 'https://www.youtube.com/watch?v=o-YBDTqX_ZU&autoplay=1';
+    }
+    if (state.search.toLowerCase() === 'btw') {
+      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
+      reactiveEasterEggs.value.btw = true;
+    }
+
     return reactiveBingo.value.filter(tile => tile.tileName.toLowerCase().includes(state.search.toLowerCase()))
   }
 })
+
+watch(state, async () => {
+  if(state.search.toLowerCase() === 'btw') {
+    reactiveEasterEggs.value.btw = true;
+  }else {
+    reactiveEasterEggs.value.btw = false;
+  }
+});
 
 const route = useRoute()
 const passcode = route.params.passcode;
@@ -217,7 +249,8 @@ timer = setInterval(showRemaining, 1000);
       </div>
     </div>
     <div v-if="filterList.length == 0 && reactiveBingo.length !== 0" class="flex justify-center pt-2">
-      <img class="object-contain max-w-full rounded-lg " alt="no search results"
+      <img v-if="reactiveEasterEggs.btw " :src="`./tiles/btw.png`" class="object-contain max-w-full rounded-lg" alt="btw">
+      <img v-else class="object-contain max-w-full rounded-lg " alt="no search results"
            src="https://upload.wikimedia.org/wikipedia/en/8/8d/Super_Mario_Bros_Princess_Is_In_Another_Castle_Quote.png"/>
     </div>
     <transition name="fade">
@@ -230,12 +263,10 @@ timer = setInterval(showRemaining, 1000);
             <div class="line-through pt-4">{{ item.tileName }}</div>
           </div>
 
-<!--          todo Add some easter eggs as double clicks for tile 69 add double click and show nice-->
-<!--          for teh big fish have it switch to that reel big fish meme-->
-<!--          Do a few search term ones, maybe never give up on you&lt;!&ndash;&ndash;&gt;-->
-
           <div v-else class="cursor-pointer text-center" v-on:click="openModal(item)">
-            <img :src="`./tiles/${item.picName}.png?forcedupdate=2`" class="object-contain max-w-full rounded-lg" :alt="`bingo tile for ${item.tileName}`">
+            <img v-if="reactiveEasterEggs.reelBigFish && item.picName === '65'" :src="`./tiles/reel_big_fish.png`" class="object-contain max-w-full rounded-lg" alt="Reel big fish easter egg">
+            <img v-else-if="reactiveEasterEggs.nice && item.picName === '69'" :src="`./tiles/nice.png`" class="object-contain max-w-full rounded-lg" alt="tile 69 nice">
+            <img v-else :src="`./tiles/${item.picName}.png?forcedupdate=2`" class="object-contain max-w-full rounded-lg" :alt="`bingo tile for ${item.tileName}`">
             <span class="text-xs">{{ item.tileName }}</span>
             <span v-if="item.portionCompleted !== '0'" class=" ">{{ item.portionCompleted }}</span>
           </div>
