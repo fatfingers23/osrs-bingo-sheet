@@ -26,7 +26,8 @@ type EasterEggs = {
   //new ones
   pause: boolean,
   aRealEgg: boolean,
-  clown: boolean
+  clown: boolean,
+  screenRotation: number
 }
 
 const reactiveBingo = ref([] as BingoTile[]);
@@ -38,7 +39,8 @@ let reactiveEasterEggs = ref({
   btw: false,
   pause: false,
   aRealEgg: false,
-  clown: false
+  clown: false,
+  screenRotation: 0
 } as EasterEggs);
 
 const state = reactive({
@@ -63,6 +65,20 @@ document.addEventListener('keyup', function (evt) {
   if (evt.key === 'Escape') {
     closeModal()
   }
+  if(evt.key == "ArrowRight") {
+    reactiveEasterEggs.value.screenRotation += 5;
+    if (reactiveEasterEggs.value.screenRotation >= 360) {
+      reactiveEasterEggs.value.screenRotation = 0;
+    }
+  }
+
+  if(evt.key == "ArrowLeft") {
+    reactiveEasterEggs.value.screenRotation -= 5;
+    if (reactiveEasterEggs.value.screenRotation <= 0) {
+      reactiveEasterEggs.value.screenRotation = 360;
+    }
+  }
+
 });
 
 function openModal(item: LooseObject): void {
@@ -285,7 +301,7 @@ timer = setInterval(showRemaining, 1000);
     <source src="/tiles/scapeMain.mp3" type="audio/mpeg"/>
   </audio>
 
-  <div class="p-3">
+  <div class="p-3" :style="{transform: `rotate(${reactiveEasterEggs.screenRotation}deg)`}">
     <small class="super-small">at the bottom right</small>
     <div class="text-center mt-10">
       <h1 class="text-3xl">Insomniacs B-I-N-G-O</h1>
@@ -388,7 +404,7 @@ timer = setInterval(showRemaining, 1000);
 
     <div class="flex justify-center p-6 md:p-10">
       <a @click="pleaseGodMakeItStop" class="text-sm underline cursor-pointer">
-        if the audio is playing and anoying you can click here to permanently stop it
+        if the audio is playing and annoying you can click here to permanently stop it
       </a>
     </div>
     <div class="flex justify-end">
