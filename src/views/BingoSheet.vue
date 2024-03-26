@@ -1,5 +1,5 @@
 <script setup lang="ts" xmlns:x-transition="http://www.w3.org/1999/xhtml">
-import {reactive, computed, onMounted, ref, watch} from 'vue'
+import {computed, onMounted, reactive, ref, watch} from 'vue'
 // eslint-disable-next-line no-undef
 import Papa from 'papaparse'
 import {useRoute} from 'vue-router'
@@ -83,11 +83,6 @@ const filterList = computed(() => {
     if (state.search.toLowerCase() === neverGoingToGiveYouUp.toLowerCase()) {
       window.location.href = 'https://www.youtube.com/watch?v=o-YBDTqX_ZU&autoplay=1';
     }
-    if (state.search.toLowerCase() === 'btw') {
-      // eslint-disable-next-line vue/no-side-effects-in-computed-properties
-      reactiveEasterEggs.value.btw = true;
-    }
-
     return reactiveBingo.value.filter(tile => tile.tileName.toLowerCase().includes(state.search.toLowerCase()))
   }
 })
@@ -119,9 +114,7 @@ onMounted(async () => {
   const getCheckedTilesRequest =
       await fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTYBmQ7Vwo4ttP6MIJXlvowR968cxulaVIG9jSo9174BlEckmEs0nlVAMi1Mlg5L8jvCc7MrR3ScaKa/pub?gid=0&single=true&output=csv")
   const getaCheckedTiles = await getCheckedTilesRequest.text()
-  const sheet =  Papa.parse(getaCheckedTiles, {header: true}).data as LooseObject[];
-  // - 3 here is for the leader board that is at the end
-  reactiveGSheet.value = sheet.splice(0, sheet.length - 3)
+  reactiveGSheet.value = Papa.parse(getaCheckedTiles, {header: true}).data as LooseObject[];
 
   if (passcode) {
     await getTeamPasscodes();
