@@ -250,7 +250,7 @@ const hiddenButton = () => {
 
 
 const start = new Date("2024-03-29T18:00:00Z")
-const end = new Date("2024-04-07T00:00:00Z")
+const end = new Date("2024-04-08T00:00:00Z")
 
 
 const _second = 1000;
