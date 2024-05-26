@@ -7,6 +7,23 @@ import JSConfetti from 'js-confetti'
 
 const confetti = new JSConfetti();
 
+const jarPics = [
+    "https://oldschool.runescape.wiki/images/Jar_of_chemicals_detail.png?c118f",
+    "https://oldschool.runescape.wiki/images/Jar_of_darkness_detail.png?c118f",
+    "https://oldschool.runescape.wiki/images/Jar_of_decay_detail.png?c118f",
+    "https://oldschool.runescape.wiki/images/Jar_of_dirt_detail.png?f533d",
+    "https://oldschool.runescape.wiki/images/Jar_of_dreams_detail.png?f533d",
+    "https://oldschool.runescape.wiki/images/thumb/Jar_of_eyes_detail.png/180px-Jar_of_eyes_detail.png?f533d",
+    "https://oldschool.runescape.wiki/images/Jar_of_miasma_detail.png?f533d",
+    "https://oldschool.runescape.wiki/images/Jar_of_sand_detail.png?f533d",
+    "https://oldschool.runescape.wiki/images/Jar_of_smoke_detail.png?f533d",
+    "https://oldschool.runescape.wiki/images/Jar_of_souls_detail.png?e6cf8",
+    "https://oldschool.runescape.wiki/images/Jar_of_spirits_detail.png?e6cf8",
+    "https://oldschool.runescape.wiki/images/Jar_of_stone_detail.png?e6cf8",
+    "https://oldschool.runescape.wiki/images/Jar_of_swamp_detail.png?e6cf8"
+]
+
+
 interface LooseObject {
   [key: string]: any
 }
@@ -25,9 +42,11 @@ type EasterEggs = {
   btw: boolean,
   //new ones
   pause: boolean,
-  aRealEgg: boolean,
   clown: boolean,
-  screenRotation: number
+  screenRotation: number,
+  jar: boolean,
+  lastRandomJar: string,
+  nerd: boolean
 }
 
 const reactiveBingo = ref([] as BingoTile[]);
@@ -38,9 +57,11 @@ let reactiveEasterEggs = ref({
   nice:false,
   btw: false,
   pause: false,
-  aRealEgg: false,
   clown: false,
-  screenRotation: 0
+  screenRotation: 0,
+  jar: false,
+  lastRandomJar: '',
+  nerd: false
 } as EasterEggs);
 
 const state = reactive({
@@ -90,6 +111,10 @@ function openModal(item: LooseObject): void {
     reactiveEasterEggs.value.nice = true;
   }
 
+  if(item.picName === '63') {
+    reactiveEasterEggs.value.nerd = true;
+  }
+
   state.modal = true;
   state.tile.tileName = item.tileName;
   state.tile.description = item.description;
@@ -107,15 +132,25 @@ function closeModal(): void {
   };
 }
 
-const neverGoingToGiveYouUp = "Never going to give you up";
+const rickRoll = [
+    'never',
+    'gonna',
+    'going',
+    'give',
+    'you',
+    'up',
+    'roll',
+    'rick roll'
+]
+
 
 const filterList = computed(() => {
   //This is needed cause the new bingo sheet goes pass the lines of bingo items
   if (state.search === '') {
     return reactiveBingo.value
   } else {
-    if (state.search.toLowerCase() === neverGoingToGiveYouUp.toLowerCase()) {
-      window.location.href = 'https://www.youtube.com/watch?v=o-YBDTqX_ZU&autoplay=1';
+    if (rickRoll.includes(state.search.toLowerCase())) {
+      window.location.href = 'https://www.youtube.com/watch?v=dQw4w9WgXcQ&autoplay=1';
     }
     return reactiveBingo.value.filter(tile => tile.tileName.toLowerCase().includes(state.search.toLowerCase()))
   }
@@ -135,6 +170,12 @@ watch(state, async () => {
   if(state.search.toLowerCase() === '🤡' || state.search.toLowerCase() === 'clown') {
     reactiveEasterEggs.value.clown = true;
   }
+
+  if(state.search.toLowerCase() === 'jar'){
+    reactiveEasterEggs.value.jar = true;
+    document.body.classList.add('jar-background');
+  }
+
 });
 
 const route = useRoute()
@@ -365,6 +406,7 @@ timer = setInterval(showRemaining, 1000);
             <img v-if="reactiveEasterEggs.reelBigFish && item.picName === '48'" :src="`./tiles/reel_big_fish.png`" class="object-contain max-w-full rounded-lg" alt="Reel big fish easter egg">
             <img v-else-if="reactiveEasterEggs.nice && item.picName === '69'" :src="`./tiles/nice.png`" class="object-contain max-w-full rounded-lg" alt="tile 69 nice">
             <img v-else-if="reactiveEasterEggs.clown" :src="`./tiles/dangler_head.png`" class="object-contain max-w-full rounded-lg" alt="clown">
+            <img v-else-if="reactiveEasterEggs.nerd && item.picName == '63'" src="https://preview.redd.it/q6qj6v4sqpdc1.jpeg?width=1024&auto=webp&s=4690f1f1b6e58a653f7b5acac8d0cc798c0b0b26" class="object-contain max-w-full rounded-lg" alt="nerd">
             <img v-else :src="`./tiles/${item.picName}.png?NewBingo`" class="object-contain max-w-full rounded-lg" :alt="`bingo tile for ${item.tileName}`">
 <!--            Un comment the lines below to make setup easier for naming pictures-->
 <!--            <span>{{item.picName}}</span>-->
@@ -377,6 +419,9 @@ timer = setInterval(showRemaining, 1000);
           <small v-if="item.picName === '47'" class="super-small">Go to the search bar and enter the first word of each message in order!</small>
           </div>
         </div>
+        <template v-if="reactiveEasterEggs.jar" >
+          <img  v-for="(jar, index) in jarPics" :key="index" :src="jar" class="object-contain max-w-full rounded-lg" alt="jar">
+        </template>
       </div>
       <div v-else class="text-center mt-10">
         <span>Loading the mother of all bingo sheets</span>
@@ -392,7 +437,7 @@ timer = setInterval(showRemaining, 1000);
       </a>
     </div>
     <div class="flex justify-end">
-      <small class="super-small">You need to check under the "Cerberus Unique"</small>
+      <small class="super-small">You need to check under the "Enhanced Crystal Teleport Seed"</small>
     </div>
     <button class="hidden btn btn-outline" @click="hiddenButton">What happens if you click me?</button>
     </div>
@@ -423,7 +468,7 @@ timer = setInterval(showRemaining, 1000);
 
 </template>
 
-<style scoped>
+<style >
 
 .super-small {
   font-size: 2px;
@@ -433,6 +478,13 @@ timer = setInterval(showRemaining, 1000);
   width: 101px;
   height: 88px;
   background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' version='1.1' preserveAspectRatio='none' viewBox='0 0 100 100'><path d='M100 0 L0 100 ' stroke='black' stroke-width='1'/><path d='M0 0 L100 100 ' stroke='black' stroke-width='1'/></svg>") no-repeat center center;
+}
+
+.jar-background {
+  background-image:  url("https://oldschool.runescape.wiki/images/Jar_of_darkness_detail.png?c118f");
+  background-repeat: space;
+
+  background-size: 100px;
 }
 
 </style>
