@@ -110,6 +110,7 @@ function closeModal(): void {
 const neverGoingToGiveYouUp = "Never going to give you up";
 
 const filterList = computed(() => {
+  //This is needed cause the new bingo sheet goes pass the lines of bingo items
   if (state.search === '') {
     return reactiveBingo.value
   } else {
@@ -140,8 +141,8 @@ const route = useRoute()
 const passcode = route.params.passcode;
 
 const getTeamPasscodes = async () => {
-  const pastCodeRequest = await fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTYBmQ7Vwo4ttP6MIJXlvowR968cxulaVIG9jSo9174BlEckmEs0nlVAMi1Mlg5L8jvCc7MrR3ScaKa/pub?gid=32278501&single=true&output=csv");
-  const pasCode = await pastCodeRequest.text();
+  const passCodeRequest = await fetch(import.meta.env.VITE_GSHEET_PASS_CODE_URL);
+  const pasCode = await passCodeRequest.text();
   const parsedSheet = Papa.parse(pasCode, {header: true}) as LooseObject;
   const teamName = parsedSheet.data.find((x: {
     [x: string]: string | string[];
@@ -196,9 +197,10 @@ onMounted(async () => {
   }
 
   const getCheckedTilesRequest =
-      await fetch("https://docs.google.com/spreadsheets/d/e/2PACX-1vTYBmQ7Vwo4ttP6MIJXlvowR968cxulaVIG9jSo9174BlEckmEs0nlVAMi1Mlg5L8jvCc7MrR3ScaKa/pub?gid=0&single=true&output=csv")
+      await fetch(import.meta.env.VITE_GSHEET_BINGO_ITEMS_URL)
   const getaCheckedTiles = await getCheckedTilesRequest.text()
-  reactiveGSheet.value = Papa.parse(getaCheckedTiles, {header: true}).data as LooseObject[];
+  let temp = Papa.parse(getaCheckedTiles, {header: true}).data as LooseObject[];
+  reactiveGSheet.value = temp.slice(0, 65);
 
   if (passcode) {
     await getTeamPasscodes();
@@ -249,8 +251,8 @@ const hiddenButton = () => {
 }
 
 
-const start = new Date("2024-03-29T18:00:00Z")
-const end = new Date("2024-04-08T00:00:00Z")
+const start = new Date("2024-05-30T23:00:00Z")
+const end = new Date("2024-06-10T23:00:00Z")
 
 
 const _second = 1000;
@@ -305,7 +307,7 @@ timer = setInterval(showRemaining, 1000);
     <div :style="{transform: `rotate(${reactiveEasterEggs.screenRotation}deg)`}">
     <small class="super-small">at the bottom right</small>
     <div class="text-center mt-10">
-      <h1 class="text-3xl">Insomniacs B-I-N-G-O</h1>
+      <h1 class="text-3xl">Battle of the 🫙</h1>
       <small class="super-small">look at the top left</small>
       <br>
       <span class="text-1xl font-bold">{{ start.toLocaleString() }} till {{ end.toLocaleString() }}</span>
