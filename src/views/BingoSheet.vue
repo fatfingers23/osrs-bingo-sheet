@@ -82,7 +82,7 @@ document.addEventListener('keyup', function (evt) {
 });
 
 function openModal(item: LooseObject): void {
-  if(item.picName === '65') {
+  if(item.picName === '48') {
     reactiveEasterEggs.value.reelBigFish = true;
   }
 
@@ -252,7 +252,7 @@ const hiddenButton = () => {
 
 
 const start = new Date("2024-05-30T23:00:00Z")
-const end = new Date("2024-06-10T23:00:00Z")
+const end = new Date("2024-06-09T23:00:00Z")
 
 
 const _second = 1000;
@@ -362,10 +362,13 @@ timer = setInterval(showRemaining, 1000);
           </div>
 
           <div v-else class="cursor-pointer text-center" v-on:click="openModal(item)">
-            <img v-if="reactiveEasterEggs.reelBigFish && item.picName === '65'" :src="`./tiles/reel_big_fish.png`" class="object-contain max-w-full rounded-lg" alt="Reel big fish easter egg">
+            <img v-if="reactiveEasterEggs.reelBigFish && item.picName === '48'" :src="`./tiles/reel_big_fish.png`" class="object-contain max-w-full rounded-lg" alt="Reel big fish easter egg">
             <img v-else-if="reactiveEasterEggs.nice && item.picName === '69'" :src="`./tiles/nice.png`" class="object-contain max-w-full rounded-lg" alt="tile 69 nice">
             <img v-else-if="reactiveEasterEggs.clown" :src="`./tiles/dangler_head.png`" class="object-contain max-w-full rounded-lg" alt="clown">
-            <img v-else :src="`./tiles/${item.picName}.png?forcedupdate=2`" class="object-contain max-w-full rounded-lg" :alt="`bingo tile for ${item.tileName}`">
+            <img v-else :src="`./tiles/${item.picName}.png?NewBingo`" class="object-contain max-w-full rounded-lg" :alt="`bingo tile for ${item.tileName}`">
+<!--            Un comment the lines below to make setup easier for naming pictures-->
+<!--            <span>{{item.picName}}</span>-->
+<!--            <br/>-->
             <span class="text-xs">{{ item.tileName }}</span>
             <br/>
             <span v-if="item.portionCompleted !== '0'" class=" ">{{ item.portionCompleted }}</span>
@@ -401,7 +404,7 @@ timer = setInterval(showRemaining, 1000);
         <h3 class="font-bold text-lg">{{ state.tile.tileName }}</h3>
         <p class="py-4">{{ state.tile.description }}</p>
         <div class="flex justify-center text-center">
-          <img :src="`./tiles/${state.tile.picName}.png?forcedUpdate=2`" alt="bingo tile">
+          <img :src="`./tiles/${state.tile.picName}.png?NewBingo`" alt="bingo tile">
 
         </div>
         <div v-show="state.tile.portionCompleted" class="text-center">
