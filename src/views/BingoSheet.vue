@@ -395,25 +395,22 @@ timer = setInterval(showRemaining, 1000);
     <transition name="fade">
 
       <div v-if="reactiveBingo.length > 0"
-           class="md:p-10 p-5 grid gap-2 md:gap-4 grid-cols-4 grid-rows-2 md:grid-cols-8 md:grid-rows-4">
+           class="md:p-10 p-5 grid gap-2 md:gap-4 grid-cols-3 grid-rows-2 md:grid-cols-9 md:grid-rows-4">
 
         <div v-for="(item, index) in filterList" :key="index">
           <div v-if="item.complete" class="cursor-pointer done" v-on:click="openModal(item)">
             <div class="line-through pt-4">{{ item.tileName }}</div>
           </div>
 
-          <div v-else class="cursor-pointer text-center" v-on:click="openModal(item)">
+          <div v-else class="flex flex-col cursor-pointer text-center justify-center" v-on:click="openModal(item)">
             <img v-if="reactiveEasterEggs.reelBigFish && item.picName === '48'" :src="`./tiles/reel_big_fish.png`" class="object-contain max-w-full rounded-lg" alt="Reel big fish easter egg">
             <img v-else-if="reactiveEasterEggs.nice && item.picName === '69'" :src="`./tiles/nice.png`" class="object-contain max-w-full rounded-lg" alt="tile 69 nice">
             <img v-else-if="reactiveEasterEggs.clown" :src="`./tiles/dangler_head.png`" class="object-contain max-w-full rounded-lg" alt="clown">
             <img v-else-if="reactiveEasterEggs.nerd && item.picName == '63'" src="https://preview.redd.it/q6qj6v4sqpdc1.jpeg?width=1024&auto=webp&s=4690f1f1b6e58a653f7b5acac8d0cc798c0b0b26" class="object-contain max-w-full rounded-lg" alt="nerd">
             <img v-else :src="`./tiles/${item.picName}.png?NewBingo`" class="object-contain max-w-full rounded-lg" :alt="`bingo tile for ${item.tileName}`">
-<!--            Un comment the lines below to make setup easier for naming pictures-->
-<!--            <span>{{item.picName}}</span>-->
-<!--            <br/>-->
-            <span class="text-xs">{{ item.tileName }}</span>
-            <br/>
-            <span v-if="item.portionCompleted !== '0'" class=" ">{{ item.portionCompleted }}</span>
+
+            <span class="text-accent ">{{ item.tileName }}</span>
+            <span v-if="item.portionCompleted !== '0'" class="text-secondary">{{ item.portionCompleted }}</span>
           </div>
           <div class="flex justify-center">
           <small v-if="item.picName === '47'" class="super-small">Go to the search bar and enter the first word of each message in order!</small>
