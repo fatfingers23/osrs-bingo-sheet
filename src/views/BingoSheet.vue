@@ -137,7 +137,6 @@ const rickRoll = [
     'gonna',
     'going',
     'give',
-    'you',
     'up',
     'roll',
     'rick roll'
