@@ -48,7 +48,9 @@ type EasterEggs = {
   jar: boolean,
   lastRandomJar: string,
   nerd: boolean,
-  youveWon: boolean
+  youveWon: boolean,
+  really: boolean,
+  nex: boolean
 }
 
 const reactiveBingo = ref([] as BingoTile[]);
@@ -65,7 +67,9 @@ let reactiveEasterEggs = ref({
   jar: false,
   lastRandomJar: '',
   nerd: false,
-  youveWon: false
+  youveWon: false,
+  really: false,
+  nex: false
 
 } as EasterEggs);
 
@@ -122,6 +126,10 @@ function openModal(item: LooseObject): void {
 
   if(item.picName === '63') {
     reactiveEasterEggs.value.nerd = true;
+  }
+
+  if(item.picName === '34') {
+    reactiveEasterEggs.value.nex = true;
   }
 
   state.modal = true;
@@ -299,6 +307,13 @@ onMounted(async () => {
       portionCompleted: partial,
     } as unknown as BingoTile;
   }) as BingoTile[]
+
+  const didYouWin = Math.random() < 0.10;
+  if (didYouWin) {
+    reactiveEasterEggs.value.youveWon = true;
+    await confetti.addConfetti();
+  }
+
 })
 
 const hiddenButton = () => {
@@ -324,7 +339,7 @@ const hiddenButton = () => {
 
 
 const start = new Date("2024-08-16T00:00:00Z")
-const end = new Date("2024-06-26T00:00:00Z")
+const end = new Date("2024-08-26T00:00:00Z")
 
 
 const _second = 1000;
@@ -443,6 +458,9 @@ const randomTrueFalse =  Math.random() < 0.5;
             <img v-else-if="reactiveEasterEggs.nice && item.picName === '69'" :src="`./tiles/nice.png`" class="object-contain max-w-full rounded-lg" alt="tile 69 nice">
             <img v-else-if="reactiveEasterEggs.clown" :src="`./tiles/dangler_head.png`" class="object-contain max-w-full rounded-lg" alt="clown">
             <img v-else-if="reactiveEasterEggs.nerd && item.picName == '63'" src="https://preview.redd.it/q6qj6v4sqpdc1.jpeg?width=1024&auto=webp&s=4690f1f1b6e58a653f7b5acac8d0cc798c0b0b26" class="object-contain max-w-full rounded-lg" alt="nerd">
+            <video v-else-if="reactiveEasterEggs.nex && item.picName === '34'" autoplay loop>
+              <source src="https://images-ext-1.discordapp.net/external/Zu1akmHHtjOR9DtAJVrOMIKzmY-Lf4rnjqCa0qxaHtM/https/media.tenor.com/id1cX15kQawAAAPo/nex-osrs.mp4" type="video/mp4">
+            </video>
             <img :style="[item.picName == '0' ? {transform: `rotate(${reactiveEasterEggs.zulrahTileRotate}deg)`}: '']" v-else :src="`./tiles/${item.picName}.png?AGAIN`" class="object-contain max-w-full rounded-lg" :alt="`bingo tile for ${item.tileName}`">
             <span class="text-accent ">{{ item.tileName }}</span>
 <!--            <span class="text-accent ">{{ item.picName }}</span>-->
@@ -453,7 +471,7 @@ const randomTrueFalse =  Math.random() < 0.5;
           </div>
         </div>
         <template v-if="reactiveEasterEggs.jar" >
-          <img  v-for="(jar, index) in jarPics" :key="index" :src="jar" class="object-contain max-w-full rounded-lg" alt="jar">
+          <img v-for="(jar, index) in jarPics" :key="index" :src="jar" class="object-contain max-w-full rounded-lg" alt="jar">
         </template>
       </div>
       <div v-else class="text-center mt-10">
@@ -497,20 +515,17 @@ const randomTrueFalse =  Math.random() < 0.5;
     </dialog>
 
 
-    <dialog id="youve-won" :class="{'modal sm:modal-middle': true, 'modal-open': state.modal}">
-      <div class="modal-box">
-        <h3 class="font-bold text-lg">{{ state.tile.tileName }}</h3>
-        <p class="py-4">{{ state.tile.description }}</p>
-        <div class="flex justify-center text-center">
-          <img :src="`./tiles/${state.tile.picName}.png?AGAIN`" alt="bingo tile">
+    <dialog id="youve-won" :class="{'modal sm:modal-middle': true, 'modal-open': reactiveEasterEggs.youveWon}">
+      <div class="modal-box text-center">
+        <h3 class="font-bold text-lg uppercase">🎉 YOU HAVE WON AN IPAD 🎉</h3>
+        <div class="flex flex-col justify-center pt-5">
 
-        </div>
-        <div v-show="state.tile.portionCompleted" class="text-center">
-          <p v-if="state.tile.portionCompleted !== '0'">{{ state.tile.portionCompleted }}</p>
+          <img v-if="reactiveEasterEggs.really" src="https://media1.tenor.com/m/7mbgg5rcJ1wAAAAd/justin-timberlake.gif" alt="really">
+          <button class="btn btn-primary" @click="() => reactiveEasterEggs.really = true">Claim your 🎁 </button>
         </div>
         <div class="modal-action">
           <form method="dialog">
-            <button class="btn" @click="() => closeModal()">Close</button>
+            <button class="btn" @click="() => reactiveEasterEggs.youveWon = false">Close</button>
           </form>
         </div>
       </div>
