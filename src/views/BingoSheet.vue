@@ -103,7 +103,7 @@ document.addEventListener('keyup', function (evt) {
 });
 
 function openModal(item: LooseObject): void {
-  if(item.picName === '48') {
+  if(item.picName === '10') {
     reactiveEasterEggs.value.reelBigFish = true;
   }
 
@@ -291,8 +291,8 @@ const hiddenButton = () => {
 }
 
 
-const start = new Date("2024-05-30T23:00:00Z")
-const end = new Date("2024-06-09T23:00:00Z")
+const start = new Date("2024-08-16T00:00:00Z")
+const end = new Date("2024-06-26T00:00:00Z")
 
 
 const _second = 1000;
@@ -335,6 +335,7 @@ const showRemaining = () => {
 
 timer = setInterval(showRemaining, 1000);
 
+const randomTrueFalse =  Math.random() < 0.5;
 
 </script>
 
@@ -347,7 +348,7 @@ timer = setInterval(showRemaining, 1000);
     <div :style="{transform: `rotate(${reactiveEasterEggs.screenRotation}deg)`}">
     <small class="super-small">at the bottom right</small>
     <div class="text-center mt-10">
-      <h1 class="text-3xl">Battle of the 🫙</h1>
+      <h1 class="text-3xl">Back to <span v-if="randomTrueFalse" class="line-through">school</span> <span v-else class="line-through">work</span> Scape bingo</h1>
       <small class="super-small">look at the top left</small>
       <br>
       <span class="text-1xl font-bold">{{ start.toLocaleString() }} till {{ end.toLocaleString() }}</span>
@@ -391,24 +392,28 @@ timer = setInterval(showRemaining, 1000);
       <img v-else class="object-contain max-w-full rounded-lg " alt="no search results"
            src="https://upload.wikimedia.org/wikipedia/en/8/8d/Super_Mario_Bros_Princess_Is_In_Another_Castle_Quote.png"/>
     </div>
+
+<!--      The bingo sheet-->
     <transition name="fade">
 
       <div v-if="reactiveBingo.length > 0"
-           class="md:p-10 p-5 grid gap-2 md:gap-4 grid-cols-3 grid-rows-2 md:grid-cols-9 md:grid-rows-4">
+           class="md:p-10 p-5 grid gap-2 md:gap-4 grid-cols-3 grid-rows-2 md:grid-cols-5 md:grid-rows-4">
 
         <div v-for="(item, index) in filterList" :key="index">
+<!--          completed tile-->
           <div v-if="item.complete" class="cursor-pointer done" v-on:click="openModal(item)">
             <div class="line-through pt-4">{{ item.tileName }}</div>
           </div>
 
+<!--          Un completed tile-->
           <div v-else class="flex flex-col cursor-pointer text-center justify-center" v-on:click="openModal(item)">
-            <img v-if="reactiveEasterEggs.reelBigFish && item.picName === '48'" :src="`./tiles/reel_big_fish.png`" class="object-contain max-w-full rounded-lg" alt="Reel big fish easter egg">
+            <img v-if="reactiveEasterEggs.reelBigFish && item.picName === '10'" :src="`./tiles/reel_big_fish.png`" class="object-contain max-w-full rounded-lg" alt="Reel big fish easter egg">
             <img v-else-if="reactiveEasterEggs.nice && item.picName === '69'" :src="`./tiles/nice.png`" class="object-contain max-w-full rounded-lg" alt="tile 69 nice">
             <img v-else-if="reactiveEasterEggs.clown" :src="`./tiles/dangler_head.png`" class="object-contain max-w-full rounded-lg" alt="clown">
             <img v-else-if="reactiveEasterEggs.nerd && item.picName == '63'" src="https://preview.redd.it/q6qj6v4sqpdc1.jpeg?width=1024&auto=webp&s=4690f1f1b6e58a653f7b5acac8d0cc798c0b0b26" class="object-contain max-w-full rounded-lg" alt="nerd">
             <img v-else :src="`./tiles/${item.picName}.png?NewBingo`" class="object-contain max-w-full rounded-lg" :alt="`bingo tile for ${item.tileName}`">
-
             <span class="text-accent ">{{ item.tileName }}</span>
+<!--            <span class="text-accent ">{{ item.picName }}</span>-->
             <span v-if="item.portionCompleted !== '0'" class="text-secondary">{{ item.portionCompleted }}</span>
           </div>
           <div class="flex justify-center">
