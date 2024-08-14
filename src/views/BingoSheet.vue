@@ -44,9 +44,11 @@ type EasterEggs = {
   pause: boolean,
   clown: boolean,
   screenRotation: number,
+  zulrahTileRotate: number,
   jar: boolean,
   lastRandomJar: string,
-  nerd: boolean
+  nerd: boolean,
+  youveWon: boolean
 }
 
 const reactiveBingo = ref([] as BingoTile[]);
@@ -59,9 +61,12 @@ let reactiveEasterEggs = ref({
   pause: false,
   clown: false,
   screenRotation: 0,
+  zulrahTileRotate: 0,
   jar: false,
   lastRandomJar: '',
-  nerd: false
+  nerd: false,
+  youveWon: false
+
 } as EasterEggs);
 
 const state = reactive({
@@ -105,6 +110,10 @@ document.addEventListener('keyup', function (evt) {
 function openModal(item: LooseObject): void {
   if(item.picName === '10') {
     reactiveEasterEggs.value.reelBigFish = true;
+  }
+
+  if(item.picName === '0') {
+    startRotation()
   }
 
   if(item.picName === '69') {
@@ -223,6 +232,29 @@ const playMusic = () => {
         });
   }
 };
+
+let intervalTime = 1000; // Start with 1 second interval
+const minIntervalTime = 10; // Minimum interval time to speed up to
+const decrementStep = 50; // Decrease interval time by 50ms each step
+
+const increaseZulrahTileRotate = () => {
+  reactiveEasterEggs.value.zulrahTileRotate += 5; // Increase rotation by 5 degrees
+  if (reactiveEasterEggs.value.zulrahTileRotate >= 360) {
+    reactiveEasterEggs.value.zulrahTileRotate = 0; // Reset rotation after a full circle
+  }
+};
+
+const startRotation = () => {
+  const rotate = () => {
+    increaseZulrahTileRotate();
+    if (intervalTime > minIntervalTime) {
+      intervalTime -= decrementStep; // Decrease interval time to speed up
+    }
+    setTimeout(rotate, intervalTime);
+  };
+  rotate();
+};
+
 
 onMounted(async () => {
 
@@ -411,13 +443,13 @@ const randomTrueFalse =  Math.random() < 0.5;
             <img v-else-if="reactiveEasterEggs.nice && item.picName === '69'" :src="`./tiles/nice.png`" class="object-contain max-w-full rounded-lg" alt="tile 69 nice">
             <img v-else-if="reactiveEasterEggs.clown" :src="`./tiles/dangler_head.png`" class="object-contain max-w-full rounded-lg" alt="clown">
             <img v-else-if="reactiveEasterEggs.nerd && item.picName == '63'" src="https://preview.redd.it/q6qj6v4sqpdc1.jpeg?width=1024&auto=webp&s=4690f1f1b6e58a653f7b5acac8d0cc798c0b0b26" class="object-contain max-w-full rounded-lg" alt="nerd">
-            <img v-else :src="`./tiles/${item.picName}.png?AGAIN`" class="object-contain max-w-full rounded-lg" :alt="`bingo tile for ${item.tileName}`">
+            <img :style="[item.picName == '0' ? {transform: `rotate(${reactiveEasterEggs.zulrahTileRotate}deg)`}: '']" v-else :src="`./tiles/${item.picName}.png?AGAIN`" class="object-contain max-w-full rounded-lg" :alt="`bingo tile for ${item.tileName}`">
             <span class="text-accent ">{{ item.tileName }}</span>
 <!--            <span class="text-accent ">{{ item.picName }}</span>-->
             <span v-if="item.portionCompleted !== '0'" class="text-secondary">{{ item.portionCompleted }}</span>
           </div>
           <div class="flex justify-center">
-          <small v-if="item.picName === '47'" class="super-small">Go to the search bar and enter the first word of each message in order!</small>
+          <small v-if="item.picName === '15'" class="super-small">Go to the search bar and enter the first word of each message in order!</small>
           </div>
         </div>
         <template v-if="reactiveEasterEggs.jar" >
@@ -438,7 +470,7 @@ const randomTrueFalse =  Math.random() < 0.5;
       </a>
     </div>
     <div class="flex justify-end">
-      <small class="super-small">You need to check under the "Enhanced Crystal Teleport Seed"</small>
+      <small class="super-small">You need to check under the "Broken Pickaxe"</small>
     </div>
     <button class="hidden btn btn-outline" @click="hiddenButton">What happens if you click me?</button>
     </div>
@@ -446,6 +478,26 @@ const randomTrueFalse =  Math.random() < 0.5;
     <!-- The Modal -->
 
     <dialog id="tile details" :class="{'modal sm:modal-middle': true, 'modal-open': state.modal}">
+      <div class="modal-box">
+        <h3 class="font-bold text-lg">{{ state.tile.tileName }}</h3>
+        <p class="py-4">{{ state.tile.description }}</p>
+        <div class="flex justify-center text-center">
+          <img :src="`./tiles/${state.tile.picName}.png?AGAIN`" alt="bingo tile">
+
+        </div>
+        <div v-show="state.tile.portionCompleted" class="text-center">
+          <p v-if="state.tile.portionCompleted !== '0'">{{ state.tile.portionCompleted }}</p>
+        </div>
+        <div class="modal-action">
+          <form method="dialog">
+            <button class="btn" @click="() => closeModal()">Close</button>
+          </form>
+        </div>
+      </div>
+    </dialog>
+
+
+    <dialog id="youve-won" :class="{'modal sm:modal-middle': true, 'modal-open': state.modal}">
       <div class="modal-box">
         <h3 class="font-bold text-lg">{{ state.tile.tileName }}</h3>
         <p class="py-4">{{ state.tile.description }}</p>
