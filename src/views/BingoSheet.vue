@@ -308,7 +308,7 @@ onMounted(async () => {
     } as unknown as BingoTile;
   }) as BingoTile[]
 
-  const didYouWin = Math.random() < 0.10;
+  const didYouWin = Math.random() < 0.05;
   if (didYouWin) {
     reactiveEasterEggs.value.youveWon = true;
     await confetti.addConfetti();
@@ -338,8 +338,8 @@ const hiddenButton = () => {
 }
 
 
-const start = new Date("2024-08-16T00:00:00Z")
-const end = new Date("2024-08-26T00:00:00Z")
+const start = new Date("2024-08-15T23:00:00Z")
+const end = new Date("2024-08-25T23:00:00Z")
 
 
 const _second = 1000;
