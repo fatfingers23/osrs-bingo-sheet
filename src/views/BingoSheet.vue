@@ -466,7 +466,7 @@ const randomTrueFalse =  Math.random() < 0.5;
             </video>
             <img :style="[item.picName == '55' ? {transform: `rotate(${reactiveEasterEggs.zulrahTileRotate}deg)`}: '']" v-else :src="`./tiles/${item.picName}.png?newBingoWhoDis`" class="object-contain max-w-full rounded-lg" :alt="`bingo tile for ${item.tileName}`">
             <span class="text-accent ">{{ item.tileName }}</span>
-            <span class="text-accent ">{{ item.picName }}</span>
+<!--            <span class="text-accent ">{{ item.picName }}</span>-->
             <span v-if="item.portionCompleted !== '0'" class="text-secondary">{{ item.portionCompleted }}</span>
           </div>
           <div class="flex justify-center">
