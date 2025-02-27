@@ -113,12 +113,12 @@ document.addEventListener('keyup', function (evt) {
 
 function openModal(item: LooseObject): void {
   if(item.picName === '71') {
-    reactiveEasterEggs.value.reelBigFish = true;
+    // reactiveEasterEggs.value.reelBigFish = true;
   }
 
-  // if(item.picName === '55') {
-  //   startRotation()
-  // }
+  if(item.picName === '46') {
+    startRotation()
+  }
 
   if(item.picName === '69') {
     reactiveEasterEggs.value.nice = true;
@@ -280,9 +280,9 @@ onMounted(async () => {
       await fetch(import.meta.env.VITE_GSHEET_BINGO_ITEMS_URL)
   const getaCheckedTiles = await getCheckedTilesRequest.text()
   let temp = Papa.parse(getaCheckedTiles, {header: true}).data as LooseObject[];
-  console.log(temp);
+  // console.log(temp);
   //TODO need to change this when new sheet
-  reactiveGSheet.value = temp.slice(0, 81);
+  reactiveGSheet.value = temp.slice(0, 80);
 
   if (passcode) {
     await getTeamPasscodes();
@@ -340,8 +340,8 @@ const hiddenButton = () => {
 }
 
 
-const start = new Date("2025-01-30T17:00:00Z")
-const end = new Date("2025-02-10T01:00:00Z")
+const start = new Date("2025-02-28T18:00:00Z")
+const end = new Date("2025-03-10T01:00:00Z")
 
 
 const _second = 1000;
@@ -384,7 +384,7 @@ const showRemaining = () => {
 
 timer = setInterval(showRemaining, 1000);
 
-const randomTrueFalse =  Math.random() < 0.5;
+const randomTrueFalse =  Math.random() < 0.9;
 
 </script>
 
@@ -397,8 +397,8 @@ const randomTrueFalse =  Math.random() < 0.5;
     <div :style="{transform: `rotate(${reactiveEasterEggs.screenRotation}deg)`}">
     <small class="super-small">at the bottom right</small>
     <div class="text-center mt-10">
-      <h1 v-if="randomTrueFalse" class="text-3xl">B-I-N-G-O</h1>
-      <h1 v-else class="text-xl">B-I-N-G-O</h1>
+      <h1 v-if="randomTrueFalse" class="text-2xl">Insomniacs vs Legacy Of War Bingo</h1>
+      <h1 v-else class="text-2xl">The Sleepy vs The Angry Bingo</h1>
       <small class="super-small">look at the top left</small>
       <br>
       <span class="text-1xl font-bold">{{ start.toLocaleString() }} till {{ end.toLocaleString() }}</span>
@@ -464,13 +464,14 @@ const randomTrueFalse =  Math.random() < 0.5;
             <video v-else-if="reactiveEasterEggs.nex && item.picName === '26'" autoplay loop>
               <source src="https://images-ext-1.discordapp.net/external/Zu1akmHHtjOR9DtAJVrOMIKzmY-Lf4rnjqCa0qxaHtM/https/media.tenor.com/id1cX15kQawAAAPo/nex-osrs.mp4" type="video/mp4">
             </video>
-            <img :style="[item.picName == '55' ? {transform: `rotate(${reactiveEasterEggs.zulrahTileRotate}deg)`}: '']" v-else :src="`./tiles/${item.picName}.png?newBingoWhoDis`" class="object-contain max-w-full rounded-lg" :alt="`bingo tile for ${item.tileName}`">
+            <img :style="[item.picName == '46' ? {transform: `rotate(${reactiveEasterEggs.zulrahTileRotate}deg)`}: '']" v-else :src="`./tiles/${item.picName}.png?whyDoWeHaveSoManyBingos`" class="object-contain max-w-full rounded-lg" :alt="`bingo tile for ${item.tileName}`">
             <span class="text-accent ">{{ item.tileName }}</span>
+            <!-- TODO uncomment for debugging -->
 <!--            <span class="text-accent ">{{ item.picName }}</span>-->
             <span v-if="item.portionCompleted !== '0'" class="text-secondary">{{ item.portionCompleted }}</span>
           </div>
           <div class="flex justify-center">
-          <small v-if="item.picName === '15'" class="super-small">Go to the search bar and enter the first word of each message in order!</small>
+          <small v-if="item.picName === '49'" class="super-small">Go to the search bar and enter the first word of each message in order!</small>
           </div>
         </div>
         <template v-if="reactiveEasterEggs.jar" >
@@ -491,7 +492,7 @@ const randomTrueFalse =  Math.random() < 0.5;
       </a>
     </div>
     <div class="flex justify-end">
-      <small class="super-small">You need to check under the "Hydra claw"</small>
+      <small class="super-small">You need to check under the "Basilisk Jaw"</small>
     </div>
     <button class="hidden btn btn-outline" @click="hiddenButton">What happens if you click me?</button>
     </div>
@@ -503,7 +504,7 @@ const randomTrueFalse =  Math.random() < 0.5;
         <h3 class="font-bold text-lg">{{ state.tile.tileName }}</h3>
         <p class="py-4">{{ state.tile.description }}</p>
         <div class="flex justify-center text-center">
-          <img :src="`./tiles/${state.tile.picName}.png?newBingoWhoDis`" alt="bingo tile">
+          <img :src="`./tiles/${state.tile.picName}.png?whyDoWeHaveSoManyBingos`" alt="bingo tile">
 
         </div>
         <div v-show="state.tile.portionCompleted" class="text-center">
