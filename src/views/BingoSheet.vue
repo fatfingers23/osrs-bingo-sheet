@@ -128,8 +128,8 @@ function openModal(item: LooseObject): void {
     reactiveEasterEggs.value.nerd = true;
   }
 
-  if(item.picName === '26') {
-    // reactiveEasterEggs.value.nex = true;
+  if(item.picName === '33') {
+    reactiveEasterEggs.value.nex = true;
   }
 
   state.modal = true;
@@ -447,7 +447,7 @@ const randomTrueFalse =  Math.random() < 0.9;
     <transition name="fade">
 
       <div v-if="reactiveBingo.length > 0"
-           class="md:p-10 p-5 grid gap-2 md:gap-4 grid-cols-3 grid-rows-2 md:grid-cols-5 md:grid-rows-4">
+           class="md:p-10 p-5 grid gap-2 md:gap-4 grid-cols-3 grid-rows-2 md:grid-cols-5 md:grid-rows-4 lg:grid-cols-6 xl:grid-cols-10">
 
         <div v-for="(item, index) in filterList" :key="index">
 <!--          completed tile-->
@@ -456,15 +456,15 @@ const randomTrueFalse =  Math.random() < 0.9;
           </div>
 
 <!--          Un completed tile-->
-          <div v-else class="flex flex-col cursor-pointer text-center justify-center" v-on:click="openModal(item)">
-            <img v-if="reactiveEasterEggs.reelBigFish && item.picName === '71'" :src="`./tiles/reel_big_fish.png`" class="object-contain max-w-full rounded-lg" alt="Reel big fish easter egg">
-            <img v-else-if="reactiveEasterEggs.nice && item.picName === '69'" :src="`./tiles/nice.png`" class="object-contain max-w-full rounded-lg" alt="tile 69 nice">
-            <img v-else-if="reactiveEasterEggs.clown" :src="`./tiles/dangler_head.png`" class="object-contain max-w-full rounded-lg" alt="clown">
-            <img v-else-if="reactiveEasterEggs.nerd && item.picName == '63'" src="https://preview.redd.it/q6qj6v4sqpdc1.jpeg?width=1024&auto=webp&s=4690f1f1b6e58a653f7b5acac8d0cc798c0b0b26" class="object-contain max-w-full rounded-lg" alt="nerd">
-            <video v-else-if="reactiveEasterEggs.nex && item.picName === '26'" autoplay loop>
+          <div v-else class="flex flex-col cursor-pointer text-center items-center" v-on:click="openModal(item)">
+            <img v-if="reactiveEasterEggs.reelBigFish && item.picName === '71'" :src="`./tiles/reel_big_fish.png`" class="object-contain w-44 rounded-lg" alt="Reel big fish easter egg">
+            <img v-else-if="reactiveEasterEggs.nice && item.picName === '69'" :src="`./tiles/nice.png`" class="object-contain w-44 rounded-lg" alt="tile 69 nice">
+            <img v-else-if="reactiveEasterEggs.clown" :src="`./tiles/dangler_head.png`" class="object-contain w-44 rounded-lg" alt="clown">
+            <img v-else-if="reactiveEasterEggs.nerd && item.picName == '63'" src="https://preview.redd.it/q6qj6v4sqpdc1.jpeg?width=1024&auto=webp&s=4690f1f1b6e58a653f7b5acac8d0cc798c0b0b26" class="object-contain w-44 rounded-lg" alt="nerd">
+            <video v-else-if="reactiveEasterEggs.nex && item.picName === '33'" autoplay loop>
               <source src="https://images-ext-1.discordapp.net/external/Zu1akmHHtjOR9DtAJVrOMIKzmY-Lf4rnjqCa0qxaHtM/https/media.tenor.com/id1cX15kQawAAAPo/nex-osrs.mp4" type="video/mp4">
             </video>
-            <img :style="[item.picName == '46' ? {transform: `rotate(${reactiveEasterEggs.zulrahTileRotate}deg)`}: '']" v-else :src="`./tiles/${item.picName}.png?whyDoWeHaveSoManyBingos`" class="object-contain max-w-full rounded-lg" :alt="`bingo tile for ${item.tileName}`">
+            <img :style="[item.picName == '46' ? {transform: `rotate(${reactiveEasterEggs.zulrahTileRotate}deg)`}: '']" v-else :src="`./tiles/${item.picName}.png?whyDoWeHaveSoManyBingos`" class="object-contain w-44 rounded-lg" :alt="`bingo tile for ${item.tileName}`">
             <span class="text-accent ">{{ item.tileName }}</span>
             <!-- TODO uncomment for debugging -->
 <!--            <span class="text-accent ">{{ item.picName }}</span>-->
